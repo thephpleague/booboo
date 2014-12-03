@@ -1,0 +1,22 @@
+{
+    "name": "aura/error",
+    "type": "library",
+    "description": "Provides an error handler for PHP that can execute a stack of handlers for various purposes.",
+    "homepage": "https://github.com/auraphp/Aura.Error",
+    "license": "BSD-2-Clause",
+    "authors": [
+        {
+            "name": "Aura.Error Contributors",
+            "homepage": "https://github.com/auraphp/Aura.Error/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "psr/log": "~1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aura\\Error\\": "src/"
+        }
+    }
+}
