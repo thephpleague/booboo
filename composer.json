@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Aura\\Error\\": "src/"
+            "Savage\\ShitHappens\\": "src/"
         }
     }
 }

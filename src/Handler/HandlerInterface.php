@@ -1,6 +1,6 @@
 <?php
 
-namespace Aura\Error\Handler;
+namespace Savage\ShitHappens\Handler;
 
 interface HandlerInterface {
 

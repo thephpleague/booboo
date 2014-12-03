@@ -1,8 +1,11 @@
 <?php
 
-namespace Aura\Error;
+namespace Savage\ShitHappens;
 
-class ErrorHandler {
+use Savage\ShitHappens\Formatter;
+use Savage\ShitHappens\Handler;
+
+class Runner {
 
     const ERROR_HANDLER = 'errorHandler';
     const EXCEPTION_HANDLER = 'exceptionHandler';
@@ -11,7 +14,19 @@ class ErrorHandler {
     protected $formatterStack = array();
     protected $silenceErrors = false;
 
+    public function __construct() {
+        // Let's honor the INI settings.
+        if(ini_get('display_errors') == false) {
+            $this->silenceAllErrors(true);
+        }
+    }
+
     public function errorHandler($errno, $errstr, $errfile, $errline) {
+        // Only handle errors that match the error reporting level.
+        if(!($errno & error_reporting())) { // bitwise operation
+            return true;
+        }
+
         $e = new \ErrorException($errstr, 0, $errno, $errfile, $errline);
         $this->exceptionHandler($e);
     }
@@ -30,7 +45,7 @@ class ErrorHandler {
         set_exception_handler(array($this, self::EXCEPTION_HANDLER));
     }
 
-    public function pushHandler(HandlerInterface $handler) {
+    public function pushHandler(Handler\HandlerInterface $handler) {
         $this->handlerStack[] = $handler;
         return $this;
     }
@@ -48,7 +63,7 @@ class ErrorHandler {
         return $this;
     }
 
-    public function pushFormatter(FormatterInterface $formatter) {
+    public function pushFormatter(Formatter\FormatterInterface $formatter) {
         $this->formatterStack[] = $formatter;
         return $this;
     }
@@ -77,15 +92,28 @@ class ErrorHandler {
 
     protected function runFormatters(\Exception $e) {
         $string = '';
-        foreach(array_reverse($this->formatterStack) as $formatter) {
-            $string .= $formatter->format($e);
+
+        if($e instanceof \ErrorException) {
+            $severity = $e->getSeverity();
+        } else {
+            $severity = E_ERROR;
         }
 
-        return $string;
+        foreach(array_reverse($this->formatterStack) as $formatter) {
+            if($severity & $formatter->getErrorLimit()) {
+                return $formatter->format($e);
+            }
+        }
     }
 
     public function silenceAllErrors($bool) {
         $this->silenceErrors = (bool)$bool;
+    }
+
+    public function deregister() {
+        restore_error_handler();
+        restore_exception_handler();
+        return $this;
     }
 
 
