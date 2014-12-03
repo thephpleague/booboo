@@ -29,7 +29,8 @@ class CommandLineFormatter extends AbstractFormatter {
     protected function formatExceptions(\Exception $e) {
 
         $errorString = "\n ---------------------------\n  AN EXCEPTION HAS OCCURRED \n ---------------------------\n";
-        $errorString .= " Fatal error: Uncaught exception '%s' with message '%s' in %s on line %d\n\nStack Trace:\n%s\n";
+        $errorString .= " Fatal error: Uncaught exception '%s' with message '%s' in %s on line %d\n\n";
+        $errorString .= "Stack Trace:\n%s\n";
 
         $type = get_class($e);
         $message = $e->getMessage();
