@@ -64,15 +64,15 @@ It's very important to call Runner::register() or the object won't register itse
 ### Formatters are very important!
 
 When you're developing, you want to view errors in the browser. In order to do this, you must provide a formatter.
-Without a formatter, the system won't intelligently know how to display the errors. **If you do not set a formatter,
-errors won't be formatted at all!**
+Without a formatter, the system won't intelligently know how to display the errors. As a result, the Runner will throw
+an exception and won't register the error handlers.
 
 The library ships with four formatters for your convenience:
 
 * HtmlFormatter - Formats errors just like PHP's error formatting.
 * JsonFormatter - Perfect for displaying errors to an API.
 * CommandLineFormatter - Working with the command line? This will produce pretty command-line errors.
-* NullFormatter - This formatter simply silences all errors.
+* NullFormatter - This formatter simply silences all errors. You can pass this when display_errors = Off.
 
 Adding a formatter is easy:
 
