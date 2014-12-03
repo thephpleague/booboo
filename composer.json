@@ -1,13 +1,12 @@
 {
-    "name": "aura/error",
+    "name": "brandonsavage/shithappens",
     "type": "library",
     "description": "Provides an error handler for PHP that can execute a stack of handlers for various purposes.",
-    "homepage": "https://github.com/auraphp/Aura.Error",
-    "license": "BSD-2-Clause",
+    "license": "MIT",
     "authors": [
         {
-            "name": "Aura.Error Contributors",
-            "homepage": "https://github.com/auraphp/Aura.Error/contributors"
+            "name": "Brandon Savage",
+            "homepage": "https://www.brandonsavage.net/"
         }
     ],
     "require": {
