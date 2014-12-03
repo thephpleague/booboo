@@ -2,17 +2,20 @@
 
 namespace Savage\ShitHappens\Formatter;
 
-class HtmlFormatter extends AbstractFormatter {
+class HtmlFormatter extends AbstractFormatter
+{
 
-    public function format(\Exception $e) {
-        if($e instanceof \ErrorException) {
+    public function format(\Exception $e)
+    {
+        if ($e instanceof \ErrorException) {
             return $this->handleErrors($e);
         }
 
         return $this->formatExceptions($e);
     }
 
-    public function handleErrors(\ErrorException $e) {
+    public function handleErrors(\ErrorException $e)
+    {
         $errorString = '';
 
         $errorString = "<br /><strong>%s</strong>: %s in <strong>%s</strong> on line <strong>%d</strong><br />";
@@ -27,7 +30,8 @@ class HtmlFormatter extends AbstractFormatter {
         return $error;
     }
 
-    protected function formatExceptions(\Exception $e) {
+    protected function formatExceptions(\Exception $e)
+    {
         $errorString = "<br /><strong>Fatal error:</strong> Uncaught exception '%s' with message '%s' in %s on line %d<br />%s<br />";
 
         $type = get_class($e);

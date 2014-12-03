@@ -2,7 +2,8 @@
 
 namespace Savage\ShitHappens\Handler;
 
-interface HandlerInterface {
+interface HandlerInterface
+{
 
     public function handle(\Exception $e);
 

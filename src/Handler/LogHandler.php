@@ -2,17 +2,20 @@
 
 namespace Savage\ShitHappens\Handler;
 
-class LogHandler implements HandlerInterface {
+class LogHandler implements HandlerInterface
+{
 
     protected $logger;
 
-    public function __construct(\Psr\Log\LoggerInterface $logger) {
+    public function __construct(\Psr\Log\LoggerInterface $logger)
+    {
         $this->logger = $logger;
     }
 
-    public function handle(\Exception $e) {
+    public function handle(\Exception $e)
+    {
 
-        if($e instanceof \ErrorException) {
+        if ($e instanceof \ErrorException) {
             $this->handleErrorException($e);
             return;
         }
@@ -20,8 +23,9 @@ class LogHandler implements HandlerInterface {
         $this->logger->critical($e->getMessage() . $e->getTraceAsString());
     }
 
-    protected function handleErrorException(\ErrorException $e) {
-        switch($e->getCode()) {
+    protected function handleErrorException(\ErrorException $e)
+    {
+        switch ($e->getCode()) {
 
             case E_ERROR:
             case E_RECOVERABLE_ERROR:

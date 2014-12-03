@@ -2,13 +2,15 @@
 
 namespace Savage\ShitHappens\Formatter;
 
-abstract class AbstractFormatter implements FormatterInterface {
+abstract class AbstractFormatter implements FormatterInterface
+{
 
     protected $errorLimit = E_ALL;
 
-    protected function determineSeverityTextValue($severity) {
+    protected function determineSeverityTextValue($severity)
+    {
 
-        switch($severity) {
+        switch ($severity) {
             case E_ERROR:
             case E_USER_ERROR:
             case E_CORE_ERROR:
@@ -48,11 +50,13 @@ abstract class AbstractFormatter implements FormatterInterface {
         return $severity;
     }
 
-    public function setErrorLimit($limit = E_ALL) {
+    public function setErrorLimit($limit = E_ALL)
+    {
         $this->errorLimit = $limit;
     }
 
-    public function getErrorLimit() {
+    public function getErrorLimit()
+    {
         return $this->errorLimit;
     }
 

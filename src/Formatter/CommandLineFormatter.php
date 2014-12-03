@@ -2,17 +2,20 @@
 
 namespace Savage\ShitHappens\Formatter;
 
-class CommandLineFormatter extends AbstractFormatter {
+class CommandLineFormatter extends AbstractFormatter
+{
 
-    public function format(\Exception $e) {
-        if($e instanceof \ErrorException) {
+    public function format(\Exception $e)
+    {
+        if ($e instanceof \ErrorException) {
             return $this->handleErrors($e);
         }
 
         return $this->formatExceptions($e);
     }
 
-    public function handleErrors(\ErrorException $e) {
+    public function handleErrors(\ErrorException $e)
+    {
         $errorString = "\n ------------------------\n  AN ERROR HAS OCCURRED \n ------------------------\n";
         $errorString .= " %s: %s in %s on line %d\n";
 
@@ -26,7 +29,8 @@ class CommandLineFormatter extends AbstractFormatter {
         return $error;
     }
 
-    protected function formatExceptions(\Exception $e) {
+    protected function formatExceptions(\Exception $e)
+    {
 
         $errorString = "\n ---------------------------\n  AN EXCEPTION HAS OCCURRED \n ---------------------------\n";
         $errorString .= " Fatal error: Uncaught exception '%s' with message '%s' in %s on line %d\n\n";

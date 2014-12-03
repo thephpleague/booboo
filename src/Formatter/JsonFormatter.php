@@ -2,17 +2,20 @@
 
 namespace Savage\ShitHappens\Formatter;
 
-class JsonFormatter extends AbstractFormatter {
+class JsonFormatter extends AbstractFormatter
+{
 
-    public function format(\Exception $e) {
-        if($e instanceof \ErrorException) {
+    public function format(\Exception $e)
+    {
+        if ($e instanceof \ErrorException) {
             return $this->handleErrors($e);
         }
 
         return $this->formatExceptions($e);
     }
 
-    public function handleErrors(\ErrorException $e) {
+    public function handleErrors(\ErrorException $e)
+    {
         $severity = $this->determineSeverityTextValue($e->getSeverity());
         $message = $e->getMessage();
         $file = $e->getFile();
@@ -27,7 +30,8 @@ class JsonFormatter extends AbstractFormatter {
         return json_encode($error);
     }
 
-    protected function formatExceptions(\Exception $e) {
+    protected function formatExceptions(\Exception $e)
+    {
         $type = get_class($e);
         $message = $e->getMessage();
         $file = $e->getFile();

@@ -2,7 +2,8 @@
 
 namespace Savage\ShitHappens\Formatter;
 
-interface FormatterInterface {
+interface FormatterInterface
+{
 
     public function format(\Exception $e);
 
