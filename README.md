@@ -14,6 +14,36 @@ It is recommended that you install this library using Composer.
 $ composer require brandonsavage/shithappens
 ```
 
+## Advantages Over Existing Solutions
+
+ShitHappens is designed to help make development easier while providing an integrated solution that can be deployed to
+your production environment. ShitHappens offers the following advantages.
+
+### Errors are non-blocking
+
+Some solutions employ a blocking mechanism, causing every notice to become a fatal error. ShitHappens doesn't do this.
+Rather than raise an exception for non-fatal errors, we display the error to you in a way that makes sense and lets the
+program continue running. An E_NOTICE shouldn't become an exception.
+
+### ShitHappens won't end up in your stack trace
+
+Some solutions throw an exception for every error. Not only is this blocking, it also puts the error handler straight
+into your stack trace! We instantiate, but do not throw, an exception for error conditions, and then use the Exception
+object to format and display the error.
+
+### ShitHappens is built for logging
+
+This solution is designed with logging in mind, so that you can plug and play a PSR-3 compliant logging solution in and
+go. ShitHappens is sensitive enough to log errors, warnings and notices as such; exceptions are logged as critical, and
+E_STRICT/E_DEPRECATED warnings are logged as info. Handlers run even if formatting is disabled, so your logging will
+always be on, even in production.
+
+### ShitHappens is designed for extension
+
+We can't possibly think through all your use cases, but we know you can. That's why we use standard interfaces to make
+it easy to extend and enhance the ShitHappens functionality. (We also love pull requests; please share your
+innovations!)
+
 ## Getting Started
 
 ### Instantiation
