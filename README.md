@@ -2,7 +2,7 @@
 
 ## Quality
 
-[![Build Status](https://travis-ci.org/brandonsavage/shithappens.svg?branch=master)](https://travis-ci.org/brandonsavage/Ashithappens)
+[![Build Status](https://travis-ci.org/brandonsavage/shithappens.svg?branch=master)](https://travis-ci.org/brandonsavage/shithappens)
 
 
 ## Purpose
