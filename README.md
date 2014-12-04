@@ -1,5 +1,10 @@
 # Shit Happens
 
+## Quality
+
+[![Build Status](https://travis-ci.org/brandonsavage/shithappens.svg?branch=master)](https://travis-ci.org/brandonsavage/shithappens)
+
+
 ## Purpose
 An error handler for PHP that allows for the execution of handlers and formatters for viewing and managing errors in
 development and production. Because "shit happens."
