@@ -33,13 +33,20 @@ class Runner
 
     public function errorHandler($errno, $errstr, $errfile, $errline)
     {
+        $fatalErrors = E_ERROR | E_USER_ERROR | E_COMPILE_ERROR | E_CORE_ERROR;
+
         // Only handle errors that match the error reporting level.
-        if (!($errno & error_reporting())) { // bitwise operation
+        if (!($errno & error_reporting()) && !($errno & ($fatalErrors))) { // bitwise operation
             return true;
         }
 
         $e = new \ErrorException($errstr, 0, $errno, $errfile, $errline);
         $this->exceptionHandler($e);
+
+        // Fatal errors should be fatal
+        if($errno & $fatalErrors) {
+            exit(1);
+        }
     }
 
     public function exceptionHandler(\Exception $e)
