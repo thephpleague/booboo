@@ -5,5 +5,3 @@ php:
   - hhvm
 script:
   - phpunit -c tests/unit/ --coverage-clover=coverage.clover
-notifications:
-  - email: true
