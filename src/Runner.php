@@ -15,6 +15,9 @@ class Runner
     protected $formatterStack = array();
     protected $silenceErrors = false;
 
+    protected $errorPage;
+    protected $throwErrorsAsExceptions = false;
+
     public function __construct(array $formatters = [], array $handlers = [])
     {
         // Let's honor the INI settings.
@@ -36,15 +39,23 @@ class Runner
         $fatalErrors = E_ERROR | E_USER_ERROR | E_COMPILE_ERROR | E_CORE_ERROR;
 
         // Only handle errors that match the error reporting level.
-        if (!($errno & error_reporting()) && !($errno & ($fatalErrors))) { // bitwise operation
+        if (!($errno & error_reporting())) { // bitwise operation
+            if ($errno & $fatalErrors) {
+                exit(1);
+            }
             return true;
         }
 
         $e = new \ErrorException($errstr, 0, $errno, $errfile, $errline);
-        $this->exceptionHandler($e);
+
+        if ($this->throwErrorsAsExceptions) {
+            throw $e;
+        } else {
+            $this->exceptionHandler($e);
+        }
 
         // Fatal errors should be fatal
-        if($errno & $fatalErrors) {
+        if ($errno & $fatalErrors) {
             exit(1);
         }
     }
@@ -56,6 +67,18 @@ class Runner
         if (!$this->silenceErrors) {
             $formattedResponse = $this->runFormatters($e);
             print $formattedResponse;
+        }
+
+        if ($this->silenceErrors &&
+            isset($this->errorPage) &&
+            !($e instanceof \ErrorException)
+        ) {
+            ob_start();
+            $response = $this->errorPage->format($e);
+            ob_end_clean();
+            http_response_code(500);
+            print $response;
+            exit;
         }
     }
 
@@ -152,6 +175,16 @@ class Runner
         restore_error_handler();
         restore_exception_handler();
         return $this;
+    }
+
+    public function setErrorPageFormatter(Formatter\FormatterInterface $errorPage)
+    {
+        $this->errorPage = $errorPage;
+    }
+
+    public function treatErrorsAsExceptions($bool)
+    {
+        $this->throwErrorsAsExceptions = (bool)$bool;
     }
 
 
