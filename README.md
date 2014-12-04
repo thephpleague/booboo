@@ -14,6 +14,24 @@ It is recommended that you install this library using Composer.
 $ composer require brandonsavage/shithappens
 ```
 
+ShitHappens is compliant with [PSR-1][], [PSR-2][], [PSR-3][] and [PSR-4][]. If you notice compliance oversights, please
+send a patch via pull request.
+
+[PSR-1]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md
+[PSR-2]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md
+[PSR-3]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md
+[PSR-4]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md
+
+## Dependencies
+
+ShitHappens relies upon and requires the following dependencies:
+
+* psr/log - A PSR-3 compliant interface for logging.
+
+No other dependencies are required. The maintainer recommends installing [monolog][] for logging.
+
+[monolog]: https://github.com/Seldaek/monolog
+
 ## Advantages Over Existing Solutions
 
 ShitHappens is designed to help make development easier while providing an integrated solution that can be deployed to
