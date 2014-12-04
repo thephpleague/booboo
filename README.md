@@ -43,17 +43,17 @@ No other dependencies are required. The maintainer recommends installing [monolo
 ShitHappens is designed to help make development easier while providing an integrated solution that can be deployed to
 your production environment. ShitHappens offers the following advantages.
 
-### Errors are non-blocking
+### Errors are non-blocking by default
 
-Some solutions employ a blocking mechanism, causing every notice to become a fatal error. ShitHappens doesn't do this.
+Some solutions throw exceptions for all errors, causing every notice to become a fatal error. ShitHappens doesn't do this.
 Rather than raise an exception for non-fatal errors, we display the error to you in a way that makes sense and lets the
 program continue running. An E_NOTICE shouldn't become an exception.
 
+The Rummer object offers a method for forcing all errors to be blocking, should you wish to throw exceptions for more minor errors. This is turned off by default.
+
 ### ShitHappens won't end up in your stack trace
 
-Some solutions throw an exception for every error. Not only is this blocking, it also puts the error handler straight
-into your stack trace! We instantiate, but do not throw, an exception for error conditions, and then use the Exception
-object to format and display the error.
+Because we don't throw an exception by default, we don't generate a stack trace for minor errors. This means ShitHappens won't show up in your logs, and when it handles an exception generated elsewhere, it isn't appended there, either.
 
 ### ShitHappens is built for logging
 
