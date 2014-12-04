@@ -4,6 +4,12 @@
 An error handler for PHP that allows for the execution of handlers and formatters for viewing and managing errors in
 development and production. Because "shit happens."
 
+## The Name
+
+When production goes down, every developer I've ever worked with has exclaimed, "oh shit!" The package derrives its name from that phenomenom.
+
+For the more "stuffy" companies in the world, you can rest assured that ShitHappens will not "expose itself" to your customers. Errors are converted to exceptions but their stack traces aren't shown (unless you write a formatter that shows them), and exceptions are handled with their own stack trace, so you'll never see the package name on the web or even in your logs. 
+
 ## Installation
 
 This library requires PHP 5.4 or later.
