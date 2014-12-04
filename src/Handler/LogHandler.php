@@ -25,7 +25,7 @@ class LogHandler implements HandlerInterface
 
     protected function handleErrorException(\ErrorException $e)
     {
-        switch ($e->getCode()) {
+        switch ($e->getSeverity()) {
 
             case E_ERROR:
             case E_RECOVERABLE_ERROR:

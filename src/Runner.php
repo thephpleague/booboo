@@ -123,7 +123,7 @@ class Runner
             ob_end_clean();
             http_response_code(500);
             print $response;
-            exit;
+            return;
         }
     }
 
@@ -285,7 +285,6 @@ class Runner
     {
         restore_error_handler();
         restore_exception_handler();
-        return $this;
     }
 
     /**
