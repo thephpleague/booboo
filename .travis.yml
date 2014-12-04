@@ -5,7 +5,7 @@ php:
 script:
   - composer install
   - composer require codeclimate/php-test-reporter --dev
-  - phpunit -c tests/unit/ --coverage-clover=coverage.clover
+  - phpunit -c tests/unit/ --coverage-clover build/logs/clover.xml
 after_script:
   - vendor/bin/test-reporter
 addons:
