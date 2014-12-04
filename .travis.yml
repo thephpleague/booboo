@@ -5,3 +5,6 @@ php:
 script:
   - composer install
   - phpunit -c tests/unit/ --coverage-clover=coverage.clover
+addons:
+    code_climate:
+        repo_token: 6f17b5bcf96575d5cea99a6af56520bab37591653a9c8955dd602a43f5276fc4
