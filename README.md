@@ -3,6 +3,8 @@
 ## Quality
 
 [![Build Status](https://travis-ci.org/brandonsavage/shithappens.svg?branch=master)](https://travis-ci.org/brandonsavage/shithappens)
+[![Code Climate](https://codeclimate.com/repos/5480ea63695680519000027b/badges/2e9b4213f676a17b0f83/gpa.svg)](https://codeclimate.com/repos/5480ea63695680519000027b/feed)
+[![Test Coverage](https://codeclimate.com/repos/5480ea63695680519000027b/badges/2e9b4213f676a17b0f83/coverage.svg)](https://codeclimate.com/repos/5480ea63695680519000027b/feed)
 
 
 ## Purpose
