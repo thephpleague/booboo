@@ -8,10 +8,12 @@ class JsonFormatter extends AbstractFormatter
     public function format(\Exception $e)
     {
         if ($e instanceof \ErrorException) {
-            return $this->handleErrors($e);
+            $arrays = $this->handleErrors($e);
+        } else {
+            $arrays = $this->formatExceptions($e);
         }
 
-        return $this->formatExceptions($e);
+        return json_encode($arrays);
     }
 
     public function handleErrors(\ErrorException $e)
@@ -27,7 +29,7 @@ class JsonFormatter extends AbstractFormatter
             'file' => $file,
             'line' => $line,
         ];
-        return json_encode($error);
+        return $error;
     }
 
     protected function formatExceptions(\Exception $e)
@@ -46,6 +48,13 @@ class JsonFormatter extends AbstractFormatter
             'line' => $line,
             'trace' => $trace
         ];
-        return json_encode($error);
+
+        if($e->getPrevious()) {
+            $error = [$error];
+            $newError = $this->formatExceptions($e->getPrevious());
+            array_unshift($error, $newError);
+        }
+
+        return $error;
     }
 }

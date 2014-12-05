@@ -16,15 +16,30 @@ class HtmlFormatterTest extends PHPUnit_Framework_TestCase {
 
     public function testRegularExceptionErrorFormatting() {
         $exception = new \Exception('whoops');
-        $trace = $exception->getTraceAsString();
-        $line = $exception->getLine();
         $file = $exception->getFile();
+        $line = $exception->getLine();
         $formatter = new HtmlFormatter();
         $result = $formatter->format($exception);
+        $expected = "<br /><strong>Fatal error:</strong> Uncaught exception 'Exception' with message 'whoops' in {$file} on line {$line}<br />";
+        // Use strpos to assert the string is in the other string.
+        $this->assertNotFalse(strpos($result, $expected));
+    }
 
-        $expected = "<br /><strong>Fatal error:</strong> Uncaught exception 'Exception' with message 'whoops' in {$file} on line {$line}<br />{$trace}<br />";
+    public function testNestedExceptionsDisplayBothMessages() {
+        $exception = new \Exception('whoops');
+        $exception2 = new Exception('bang', 0, $exception);
 
-        $this->assertEquals($expected, $result);
+        $formatter = new HtmlFormatter();
+        $result = $formatter->format($exception2);
+        $expectedString1 = "'Exception' with message 'whoops'";
+        $expectedString2 = "'Exception' with message 'bang'";
+
+        $position1 = strpos($result, $expectedString1);
+        $position2 = strpos($result, $expectedString2);
+
+        $this->assertNotFalse($position1);
+        $this->assertNotFalse($position2);
+        $this->assertGreaterThan($position1, $position2);
     }
 
 }
