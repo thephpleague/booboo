@@ -5,6 +5,8 @@ php:
 script:
   - composer install
   - composer require codeclimate/php-test-reporter
+  - "curl -OL https://github.com/squizlabs/PHP_CodeSniffer/releases/download/2.0.0a2/phpcs.phar"
+  - "php phpcs.phar --standard=PSR1, PSR2 src/"
   - phpunit -c tests/unit/ --coverage-clover build/logs/clover.xml
 after_script:
   - CODECLIMATE_REPO_TOKEN=6f17b5bcf96575d5cea99a6af56520bab37591653a9c8955dd602a43f5276fc4 vendor/bin/test-reporter --stdout > codeclimate.json
