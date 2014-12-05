@@ -38,8 +38,8 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
     protected function setUp() {
         $this->runner = new Runner;
 
-        $this->formatter = Mockery::mock(Formatter\AbstractFormatter::class);
-        $this->handler = Mockery::mock(Handler\HandlerInterface::class);
+        $this->formatter = Mockery::mock('Savage\ShitHappens\Formatter\AbstractFormatter');
+        $this->handler = Mockery::mock('Savage\ShitHappens\Handler\HandlerInterface');
         $this->runner->pushFormatter($this->formatter);
     }
 
@@ -56,11 +56,11 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 
         $this->assertEmpty($runner->getHandlers());
 
-        $runner->pushHandler(Mockery::mock(Handler\HandlerInterface::class));
-        $runner->pushHandler(Mockery::mock(Handler\HandlerInterface::class));
+        $runner->pushHandler(Mockery::mock('Savage\ShitHappens\Handler\HandlerInterface'));
+        $runner->pushHandler(Mockery::mock('Savage\ShitHappens\Handler\HandlerInterface'));
 
         $this->assertEquals(2, count($runner->getHandlers()));
-        $this->assertInstanceOf(Handler\HandlerInterface::class, $runner->popHandler());
+        $this->assertInstanceOf('Savage\ShitHappens\Handler\HandlerInterface', $runner->popHandler());
         $this->assertEquals(1, count($runner->getHandlers()));
 
         $runner->clearHandlers();
@@ -72,11 +72,11 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 
         $this->assertEmpty($runner->getFormatters());
 
-        $runner->pushFormatter(Mockery::mock(Formatter\FormatterInterface::class));
-        $runner->pushFormatter(Mockery::mock(Formatter\FormatterInterface::class));
+        $runner->pushFormatter(Mockery::mock('Savage\ShitHappens\Formatter\FormatterInterface'));
+        $runner->pushFormatter(Mockery::mock('Savage\ShitHappens\Formatter\FormatterInterface'));
 
         $this->assertEquals(2, count($runner->getFormatters()));
-        $this->assertInstanceOf(Formatter\FormatterInterface::class, $runner->popFormatter());
+        $this->assertInstanceOf('Savage\ShitHappens\Formatter\FormatterInterface', $runner->popFormatter());
         $this->assertEquals(1, count($runner->getFormatters()));
 
         $runner->clearFormatters();
@@ -86,11 +86,11 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
     public function testConstructorAssignsHandlersAndFormatters() {
         $runner = new Runner(
             [
-                Mockery::mock(Formatter\FormatterInterface::class),
-                Mockery::mock(Formatter\FormatterInterface::class),
+                Mockery::mock('Savage\ShitHappens\Formatter\FormatterInterface'),
+                Mockery::mock('Savage\ShitHappens\Formatter\FormatterInterface'),
             ],
             [
-                Mockery::mock(Handler\HandlerInterface::class),
+                Mockery::mock('Savage\ShitHappens\Handler\HandlerInterface'),
             ]
         );
 
@@ -99,7 +99,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testErrorsSilencedWhenSilenceTrue() {
-        $formatter = Mockery::mock(Formatter\FormatterInterface::class);
+        $formatter = Mockery::mock('Savage\ShitHappens\Formatter\FormatterInterface');
         $formatter->shouldReceive('getErrorLimit')->never();
         $formatter->shouldReceive('format')->never();
 
@@ -160,7 +160,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testRegisterAndDeregister() {
-        $runner = new RunnerExt([Mockery::mock(Formatter\FormatterInterface::class)]);
+        $runner = new RunnerExt([Mockery::mock('Savage\ShitHappens\Formatter\FormatterInterface')]);
 
         $runner->register();
         $this->assertTrue($runner->registered);
