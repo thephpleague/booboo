@@ -76,13 +76,20 @@ class HtmlTableFormatter extends AbstractFormatter
     {
         $frames = $this->inspector->getFrames();
 
-        $errorTable = '<table border="1" cellspacing="0" cellpadding="1"><tr><td colspan="3" style="background: #ff5332">%s</td></tr>';
+        $errorTable = '<table border="1" cellspacing="0" cellpadding="1"><tr>';
+        $errorTable .= '<td colspan="3" style="background: #ff5332">%s</td></tr>';
         $errorTable = sprintf($errorTable, $error);
-        $errorTable .= '<tr><td colspan="3">Call Stack</td></tr><tr><th>#</th><th>Function</th><th>Location</th></tr>';
+        $errorTable .= '<tr><td colspan="3">Call Stack</td></tr><tr><th>#</th>';
+        $errorTable .= '<th>Function</th><th>Location</th></tr>';
 
         foreach ($frames as $k => $frame) {
             list($function, $fileline) = $this->processFrame($frame);
-            $errorTable .= sprintf('<tr><td width="3%%">%d</td><td width="40%%">%s</td><td>%s</td></tr>', $k, $function, $fileline);
+            $errorTable .= sprintf(
+                '<tr><td width="3%%">%d</td><td width="40%%">%s</td><td>%s</td></tr>',
+                $k,
+                $function,
+                $fileline
+            );
         }
 
         if (count($frames) == 0) {
