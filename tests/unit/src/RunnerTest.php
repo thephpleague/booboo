@@ -150,10 +150,6 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testErrorsSilencedWhenErrorReportingOff() {
-        if(strpos(phpversion(), 'HipHop') !== false) {
-            $this->markTestSkipped('This test fails on HHVM');
-        }
-
         $er = ini_get('display_errors');
         ini_set('display_errors', 0);
 
