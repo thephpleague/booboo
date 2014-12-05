@@ -32,7 +32,8 @@ class HtmlFormatter extends AbstractFormatter
 
     protected function formatExceptions(\Exception $e)
     {
-        $errorString = "<br /><strong>Fatal error:</strong> Uncaught exception '%s' with message '%s' in %s on line %d<br />%s<br />";
+        $errorString = "<br /><strong>Fatal error:</strong> Uncaught exception '%s' with ";
+        $errorString .= "message '%s' in %s on line %d<br />%s<br />";
 
         $type = get_class($e);
         $message = $e->getMessage();
@@ -43,5 +44,4 @@ class HtmlFormatter extends AbstractFormatter
         $error = sprintf($errorString, $type, $message, $file, $line, $trace);
         return $error;
     }
-
 }

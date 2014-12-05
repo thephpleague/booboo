@@ -307,6 +307,4 @@ class Runner
     {
         $this->throwErrorsAsExceptions = (bool)$bool;
     }
-
-
 }

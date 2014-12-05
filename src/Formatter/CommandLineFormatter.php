@@ -45,5 +45,4 @@ class CommandLineFormatter extends AbstractFormatter
         $error = sprintf($errorString, $type, $message, $file, $line, $trace);
         return $error;
     }
-
 }

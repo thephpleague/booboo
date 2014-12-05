@@ -6,5 +6,4 @@ interface HandlerInterface
 {
 
     public function handle(\Exception $e);
-
 }

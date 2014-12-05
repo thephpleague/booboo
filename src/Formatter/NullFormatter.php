@@ -9,5 +9,4 @@ class NullFormatter extends AbstractFormatter
     {
         return; // Silence the error.
     }
-
 }

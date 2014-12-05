@@ -59,5 +59,4 @@ abstract class AbstractFormatter implements FormatterInterface
     {
         return $this->errorLimit;
     }
-
 }

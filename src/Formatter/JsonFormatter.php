@@ -48,5 +48,4 @@ class JsonFormatter extends AbstractFormatter
         ];
         return json_encode($error);
     }
-
 }
