@@ -1,6 +1,6 @@
 <?php
 
-namespace Savage\ShitHappens\Exception;
+namespace Savage\BooBoo\Exception;
 
 class NoFormattersRegisteredException extends \Exception
 {

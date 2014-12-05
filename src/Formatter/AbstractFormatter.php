@@ -1,6 +1,6 @@
 <?php
 
-namespace Savage\ShitHappens\Formatter;
+namespace Savage\BooBoo\Formatter;
 
 abstract class AbstractFormatter implements FormatterInterface
 {

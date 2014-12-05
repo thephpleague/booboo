@@ -1,6 +1,6 @@
 <?php
 
-use Savage\ShitHappens\Handler\LogHandler;
+use Savage\BooBoo\Handler\LogHandler;
 
 class LogHandlerTest extends PHPUnit_Framework_TestCase {
 

@@ -1,6 +1,6 @@
 <?php
 
-use Savage\ShitHappens\Formatter;
+use Savage\BooBoo\Formatter;
 
 /**
  * Class AbstractFormatterExt

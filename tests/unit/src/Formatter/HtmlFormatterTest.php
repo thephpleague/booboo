@@ -1,6 +1,6 @@
 <?php
 
-use Savage\ShitHappens\Formatter\HtmlFormatter;
+use Savage\BooBoo\Formatter\HtmlFormatter;
 
 class HtmlFormatterTest extends PHPUnit_Framework_TestCase {
 

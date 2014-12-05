@@ -1,6 +1,6 @@
 <?php
 
-use Savage\ShitHappens\Formatter;
+use Savage\BooBoo\Formatter;
 
 class NullFormatterTest extends PHPUnit_Framework_TestCase {
 

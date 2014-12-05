@@ -1,6 +1,6 @@
 <?php
 
-use Savage\ShitHappens\Formatter\JsonFormatter;
+use Savage\BooBoo\Formatter\JsonFormatter;
 
 class JsonFormatterTest extends PHPUnit_Framework_TestCase {
 

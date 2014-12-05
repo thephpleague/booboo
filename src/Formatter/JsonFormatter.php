@@ -1,6 +1,6 @@
 <?php
 
-namespace Savage\ShitHappens\Formatter;
+namespace Savage\BooBoo\Formatter;
 
 class JsonFormatter extends AbstractFormatter
 {

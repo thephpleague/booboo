@@ -1,8 +1,8 @@
 <?php
 
-use Savage\ShitHappens\Runner;
-use Savage\ShitHappens\Formatter;
-use Savage\ShitHappens\Handler;
+use Savage\BooBoo\Runner;
+use Savage\BooBoo\Formatter;
+use Savage\BooBoo\Handler;
 
 class RunnerExt extends Runner {
 
@@ -38,13 +38,13 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
     protected function setUp() {
         $this->runner = new Runner;
 
-        $this->formatter = Mockery::mock('Savage\ShitHappens\Formatter\AbstractFormatter');
-        $this->handler = Mockery::mock('Savage\ShitHappens\Handler\HandlerInterface');
+        $this->formatter = Mockery::mock('Savage\BooBoo\Formatter\AbstractFormatter');
+        $this->handler = Mockery::mock('Savage\BooBoo\Handler\HandlerInterface');
         $this->runner->pushFormatter($this->formatter);
     }
 
     /**
-     * @expectedException Savage\ShitHappens\Exception\NoFormattersRegisteredException
+     * @expectedException Savage\BooBoo\Exception\NoFormattersRegisteredException
      */
     public function testNoFormatterRaisesException() {
         $runner = new Runner;
@@ -56,11 +56,11 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 
         $this->assertEmpty($runner->getHandlers());
 
-        $runner->pushHandler(Mockery::mock('Savage\ShitHappens\Handler\HandlerInterface'));
-        $runner->pushHandler(Mockery::mock('Savage\ShitHappens\Handler\HandlerInterface'));
+        $runner->pushHandler(Mockery::mock('Savage\BooBoo\Handler\HandlerInterface'));
+        $runner->pushHandler(Mockery::mock('Savage\BooBoo\Handler\HandlerInterface'));
 
         $this->assertEquals(2, count($runner->getHandlers()));
-        $this->assertInstanceOf('Savage\ShitHappens\Handler\HandlerInterface', $runner->popHandler());
+        $this->assertInstanceOf('Savage\BooBoo\Handler\HandlerInterface', $runner->popHandler());
         $this->assertEquals(1, count($runner->getHandlers()));
 
         $runner->clearHandlers();
@@ -72,11 +72,11 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 
         $this->assertEmpty($runner->getFormatters());
 
-        $runner->pushFormatter(Mockery::mock('Savage\ShitHappens\Formatter\FormatterInterface'));
-        $runner->pushFormatter(Mockery::mock('Savage\ShitHappens\Formatter\FormatterInterface'));
+        $runner->pushFormatter(Mockery::mock('Savage\BooBoo\Formatter\FormatterInterface'));
+        $runner->pushFormatter(Mockery::mock('Savage\BooBoo\Formatter\FormatterInterface'));
 
         $this->assertEquals(2, count($runner->getFormatters()));
-        $this->assertInstanceOf('Savage\ShitHappens\Formatter\FormatterInterface', $runner->popFormatter());
+        $this->assertInstanceOf('Savage\BooBoo\Formatter\FormatterInterface', $runner->popFormatter());
         $this->assertEquals(1, count($runner->getFormatters()));
 
         $runner->clearFormatters();
@@ -86,11 +86,11 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
     public function testConstructorAssignsHandlersAndFormatters() {
         $runner = new Runner(
             [
-                Mockery::mock('Savage\ShitHappens\Formatter\FormatterInterface'),
-                Mockery::mock('Savage\ShitHappens\Formatter\FormatterInterface'),
+                Mockery::mock('Savage\BooBoo\Formatter\FormatterInterface'),
+                Mockery::mock('Savage\BooBoo\Formatter\FormatterInterface'),
             ],
             [
-                Mockery::mock('Savage\ShitHappens\Handler\HandlerInterface'),
+                Mockery::mock('Savage\BooBoo\Handler\HandlerInterface'),
             ]
         );
 
@@ -99,7 +99,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testErrorsSilencedWhenSilenceTrue() {
-        $formatter = Mockery::mock('Savage\ShitHappens\Formatter\FormatterInterface');
+        $formatter = Mockery::mock('Savage\BooBoo\Formatter\FormatterInterface');
         $formatter->shouldReceive('getErrorLimit')->never();
         $formatter->shouldReceive('format')->never();
 
@@ -160,7 +160,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testRegisterAndDeregister() {
-        $runner = new RunnerExt([Mockery::mock('Savage\ShitHappens\Formatter\FormatterInterface')]);
+        $runner = new RunnerExt([Mockery::mock('Savage\BooBoo\Formatter\FormatterInterface')]);
 
         $runner->register();
         $this->assertTrue($runner->registered);

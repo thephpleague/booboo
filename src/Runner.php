@@ -1,9 +1,9 @@
 <?php
 
-namespace Savage\ShitHappens;
+namespace Savage\BooBoo;
 
-use Savage\ShitHappens\Formatter;
-use Savage\ShitHappens\Handler;
+use Savage\BooBoo\Formatter;
+use Savage\BooBoo\Handler;
 
 class Runner
 {

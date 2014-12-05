@@ -1,5 +1,5 @@
 {
-    "name": "brandonsavage/shithappens",
+    "name": "brandonsavage/booboo",
     "type": "library",
     "description": "Provides an error handler for PHP that can execute a stack of handlers for various purposes.",
     "license": "MIT",
@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Savage\\ShitHappens\\": "src/"
+            "Savage\\BooBoo\\": "src/"
         }
     },
     "require-dev": {

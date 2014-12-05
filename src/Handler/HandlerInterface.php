@@ -1,6 +1,6 @@
 <?php
 
-namespace Savage\ShitHappens\Handler;
+namespace Savage\BooBoo\Handler;
 
 interface HandlerInterface
 {
