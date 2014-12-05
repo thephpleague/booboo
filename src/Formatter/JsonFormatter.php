@@ -49,7 +49,7 @@ class JsonFormatter extends AbstractFormatter
             'trace' => $trace
         ];
 
-        if($e->getPrevious()) {
+        if ($e->getPrevious()) {
             $error = [$error];
             $newError = $this->formatExceptions($e->getPrevious());
             array_unshift($error, $newError);

@@ -101,10 +101,10 @@ class Inspector
             // and do not add the current exception to trace. We ensure that
             // the next frame does have a filename / linenumber, though.
             if ($this->exception instanceof ErrorException) {
-                foreach($frames as $k => $frame) {
+                foreach ($frames as $k => $frame) {
                     if (isset($frame['class']) &&
-                        strpos($frame['class'], 'BooBoo') !== false)
-                    {
+                        strpos($frame['class'], 'BooBoo') !== false
+                    ) {
                         unset($frames[$k]);
                     }
                 }

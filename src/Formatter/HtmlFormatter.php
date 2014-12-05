@@ -46,14 +46,14 @@ class HtmlFormatter extends AbstractFormatter
         $traceString = '#%d: %s %s<br />';
         $trace = '';
 
-        foreach($inspector->getFrames() as $k => $frame) {
+        foreach ($inspector->getFrames() as $k => $frame) {
             list($function, $fileline) = $this->processFrame($frame);
             $trace .= sprintf($traceString, $k, $function, $fileline);
         }
 
         $error = sprintf($errorString, $type, $message, $file, $line, $trace);
 
-        if($e->getPrevious()) {
+        if ($e->getPrevious()) {
             $error = $this->formatExceptions($e->getPrevious()) . $error;
         }
 
@@ -68,7 +68,7 @@ class HtmlFormatter extends AbstractFormatter
 
         $fileline = ($frame->getFile() ?: '<#unknown>');
         $fileline .= ':';
-        $fileline .= (int) $frame->getLine();
+        $fileline .= (int)$frame->getLine();
 
         return [$function, $fileline];
     }
