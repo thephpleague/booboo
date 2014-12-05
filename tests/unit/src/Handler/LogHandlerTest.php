@@ -16,7 +16,7 @@ class LogHandlerTest extends PHPUnit_Framework_TestCase {
 
 
     protected function setUp() {
-        $this->logger = Mockery::mock(Psr\Log\LoggerInterface::class);
+        $this->logger = Mockery::mock('Psr\Log\LoggerInterface');
         $this->handler = new LogHandler($this->logger);
     }
 
