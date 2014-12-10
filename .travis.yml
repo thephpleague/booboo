@@ -10,5 +10,5 @@ script:
   - "php phpcs.phar --standard=PSR1,PSR2 -n src/"
   - phpunit -c tests/unit/ --coverage-clover build/logs/clover.xml
 after_script:
-  - CODECLIMATE_REPO_TOKEN=6f17b5bcf96575d5cea99a6af56520bab37591653a9c8955dd602a43f5276fc4 vendor/bin/test-reporter --stdout > codeclimate.json
+  - CODECLIMATE_REPO_TOKEN=6cde41e957e7c38ff18bd750dcb9f8d72bd6bcdeeb9da466174fbb4c359e92d1 vendor/bin/test-reporter --stdout > codeclimate.json
   - "curl -X POST -d @codeclimate.json -H 'Content-Type: application/json' -H 'User-Agent: Code Climate (PHP Test Reporter v0.1.1)' https://codeclimate.com/test_reports"
