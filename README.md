@@ -51,7 +51,7 @@ Some solutions throw exceptions for all errors, causing every notice to become a
 Rather than raise an exception for non-fatal errors, we display the error to you in a way that makes sense and lets the
 program continue running. An E_NOTICE shouldn't become an exception.
 
-The Rummer object offers a method for forcing all errors to be blocking, should you wish to throw exceptions for more minor errors. This is turned off by default.
+The Runner object offers a method for forcing all errors to be blocking, should you wish to throw exceptions for more minor errors. This is turned off by default.
 
 ### BooBoo won't end up in your stack trace
 
