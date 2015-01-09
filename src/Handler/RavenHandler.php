@@ -23,7 +23,7 @@ class RavenHandler implements HandlerInterface
             $level = E_ERROR;
         }
 
-        if($this->minimumLogLevel & $level) {
+        if ($this->minimumLogLevel & $level) {
             $this->client->getIdent($this->client->captureException($e));
         }
     }
