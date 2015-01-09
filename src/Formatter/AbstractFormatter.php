@@ -15,7 +15,7 @@ abstract class AbstractFormatter implements FormatterInterface
             case E_USER_ERROR:
             case E_CORE_ERROR:
             case E_COMPILE_ERROR:
-                $severity = 'Error';
+                $severity = 'Fatal Error';
                 break;
 
             case E_WARNING:
