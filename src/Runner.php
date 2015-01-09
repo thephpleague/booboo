@@ -64,6 +64,9 @@ class Runner
         // Let's honor the INI settings.
         if (ini_get('display_errors') == false) {
             $this->silenceAllErrors(true);
+        } else {
+            // We want the formaters we register to handle the errors.
+            ini_set('display_errors', false);
         }
 
         foreach ($formatters as $formatter) {
@@ -90,7 +93,6 @@ class Runner
      */
     public function errorHandler($errno, $errstr, $errfile, $errline)
     {
-
         // Only handle errors that match the error reporting level.
         if (!($errno & error_reporting())) { // bitwise operation
             if ($errno & $this->fatalErrors) {
@@ -155,7 +157,7 @@ class Runner
                 $error['type'],
                 $error['message'],
                 $error['file'],
-                $error['file']
+                $error['line']
             );
         }
     }

@@ -36,6 +36,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
     protected $handler;
 
     protected function setUp() {
+        ini_set('display_errors', true);
         $this->runner = new Runner;
 
         $this->formatter = Mockery::mock('Savage\BooBoo\Formatter\AbstractFormatter');
