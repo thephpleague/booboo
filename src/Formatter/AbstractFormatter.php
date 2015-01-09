@@ -45,6 +45,9 @@ abstract class AbstractFormatter implements FormatterInterface
             case E_USER_DEPRECATED:
                 $severity = 'Deprecated';
                 break;
+
+            default:
+                $severity = 'Unknown Error';
         }
         return $severity;
     }

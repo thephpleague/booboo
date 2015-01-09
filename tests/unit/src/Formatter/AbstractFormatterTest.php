@@ -40,12 +40,10 @@ class AbstractFormatterTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('Deprecated', $formatter->getSeverity(E_USER_DEPRECATED));
     }
 
-    /**
-     * @expectedException \Exception
-     */
-    public function testInvalidSeverityGeneratesException() {
+    public function testInvalidSeverityGeneratesNotDeterminedMessage() {
         $formatter = new AbstractFormatterExt();
-        $formatter->getSeverity(1234);
+        $severity = $formatter->getSeverity(1234);
+        $this->assertEquals('Unknown Error', $severity);
     }
 
     public function testGetAndSetErrorSeverityLevels() {
