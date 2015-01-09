@@ -24,10 +24,10 @@ class AbstractFormatterTest extends PHPUnit_Framework_TestCase {
 
     public function testSeverityTextCorrect() {
         $formatter = new AbstractFormatterExt;
-        $this->assertEquals('Error', $formatter->getSeverity(E_ERROR));
-        $this->assertEquals('Error', $formatter->getSeverity(E_USER_ERROR));
-        $this->assertEquals('Error', $formatter->getSeverity(E_CORE_ERROR));
-        $this->assertEquals('Error', $formatter->getSeverity(E_COMPILE_ERROR));
+        $this->assertEquals('Fatal Error', $formatter->getSeverity(E_ERROR));
+        $this->assertEquals('Fatal Error', $formatter->getSeverity(E_USER_ERROR));
+        $this->assertEquals('Fatal Error', $formatter->getSeverity(E_CORE_ERROR));
+        $this->assertEquals('Fatal Error', $formatter->getSeverity(E_COMPILE_ERROR));
         $this->assertEquals('Warning', $formatter->getSeverity(E_WARNING));
         $this->assertEquals('Warning', $formatter->getSeverity(E_USER_WARNING));
         $this->assertEquals('Warning', $formatter->getSeverity(E_CORE_WARNING));

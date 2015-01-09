@@ -9,7 +9,7 @@ class HtmlFormatterTest extends PHPUnit_Framework_TestCase {
         $formatter = new HtmlFormatter();
         $result = $formatter->format($exception);
 
-        $expected = "<br /><strong>Error</strong>: whoops in <strong>index.php</strong> on line <strong>11</strong><br />";
+        $expected = "<br /><strong>Fatal Error</strong>: whoops in <strong>index.php</strong> on line <strong>11</strong><br />";
 
         $this->assertEquals($expected, $result);
     }

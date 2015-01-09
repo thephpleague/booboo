@@ -11,7 +11,7 @@ class JsonFormatterTest extends PHPUnit_Framework_TestCase {
 
         $expected = json_encode([
             'message' => 'whoops',
-            'severity' => 'Error',
+            'severity' => 'Fatal Error',
             'file' => 'index.php',
             'line' => 11,
         ]);
