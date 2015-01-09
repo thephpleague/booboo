@@ -70,6 +70,10 @@ We can't possibly think through all your use cases, but we know you can. That's 
 it easy to extend and enhance the BooBoo functionality. (We also love pull requests; please share your
 innovations!)
 
+### BooBoo is actively maintained
+
+PHP is changing every year, and BooBoo will change along with it. 
+
 ## Getting Started
 
 ### Instantiation
