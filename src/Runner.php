@@ -18,6 +18,11 @@ class Runner
     const EXCEPTION_HANDLER = 'exceptionHandler';
 
     /**
+     * A constant for the shutdown handler.
+     */
+    const SHUTDOWN_HANDLER = 'shutdownHandler';
+
+    /**
      * @var array Handler stack array
      */
     protected $handlerStack = array();
@@ -43,6 +48,14 @@ class Runner
     protected $throwErrorsAsExceptions = false;
 
     /**
+     * This isn't set as a default, because we can't. Set in the constructor.
+     *
+     * @var int
+     */
+    protected $fatalErrors;
+
+
+    /**
      * @param array $formatters
      * @param array $handlers
      */
@@ -60,6 +73,8 @@ class Runner
         foreach ($handlers as $handler) {
             $this->pushHandler($handler);
         }
+
+        $this->fatalErrors = E_ERROR | E_USER_ERROR | E_COMPILE_ERROR | E_CORE_ERROR;
     }
 
     /**
@@ -75,11 +90,10 @@ class Runner
      */
     public function errorHandler($errno, $errstr, $errfile, $errline)
     {
-        $fatalErrors = E_ERROR | E_USER_ERROR | E_COMPILE_ERROR | E_CORE_ERROR;
 
         // Only handle errors that match the error reporting level.
         if (!($errno & error_reporting())) { // bitwise operation
-            if ($errno & $fatalErrors) {
+            if ($errno & $this->fatalErrors) {
                 exit(1);
             }
             return true;
@@ -94,7 +108,7 @@ class Runner
         }
 
         // Fatal errors should be fatal
-        if ($errno & $fatalErrors) {
+        if ($errno & $this->fatalErrors) {
             exit(1);
         }
     }
@@ -128,6 +142,25 @@ class Runner
     }
 
     /**
+     * A function for running the error handler on a fatal error.
+     */
+    public function shutdownHandler()
+    {
+        // We can't throw exceptions in the shutdown handler.
+        $this->treatErrorsAsExceptions(false);
+
+        $error = error_get_last();
+        if ($error && $error['type'] & $this->fatalErrors) {
+            $this->errorHandler(
+                $error['type'],
+                $error['message'],
+                $error['file'],
+                $error['file']
+            );
+        }
+    }
+
+    /**
      * Registers the error handlers, and is required to be called before the
      * error handling code is effective.
      *
@@ -143,6 +176,7 @@ class Runner
 
         set_error_handler(array($this, self::ERROR_HANDLER));
         set_exception_handler(array($this, self::EXCEPTION_HANDLER));
+        register_shutdown_function(array($this, self::SHUTDOWN_HANDLER));
     }
 
     /**
