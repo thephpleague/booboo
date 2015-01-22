@@ -16,11 +16,22 @@ class CommandLineFormatter extends AbstractFormatter
 
     public function handleErrors(\ErrorException $e)
     {
-        $errorString = "\n ------------------------\n  AN ERROR HAS OCCURRED \n ------------------------\n";
-        $errorString .= " %s: %s in %s on line %d\n";
+        $errorString = "%s%s in %s on line %d\n";
 
         $severity = $this->determineSeverityTextValue($e->getSeverity());
 
+        // Let's calculate the length of the box, and set the box border.
+        $dashes = "\n+";
+        $severityLength = strlen($severity);
+        for ($i = 0; $i < $severityLength + 2; $i++) {
+            $dashes .= '-';
+        }
+
+        $dashes .= "+\n";
+
+        $severity = $dashes . '| ' . strtoupper($severity) . " |". $dashes;
+
+        // Okay, now let's prep the message components.
         $error = $e->getMessage();
         $file = $e->getFile();
         $line = $e->getLine();
@@ -31,9 +42,8 @@ class CommandLineFormatter extends AbstractFormatter
 
     protected function formatExceptions(\Exception $e)
     {
-
-        $errorString = "\n ---------------------------\n  AN EXCEPTION HAS OCCURRED \n ---------------------------\n";
-        $errorString .= " Fatal error: Uncaught exception '%s' with message '%s' in %s on line %d\n\n";
+        $errorString = "+---------------------+\n| UNHANDLED EXCEPTION |\n+---------------------+\n";
+        $errorString .= "Fatal error: Uncaught exception '%s' with message '%s' in %s on line %d\n\n";
         $errorString .= "Stack Trace:\n%s\n";
 
         $type = get_class($e);
