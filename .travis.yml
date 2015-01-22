@@ -5,7 +5,7 @@ php:
   - 5.6
 script:
   - composer install
-  - phpunit -c tests/unit/ --coverage-clover build/logs/clover.xml
+  - phpunit --coverage-clover build/logs/clover.xml
 after_success:
   - composer require codeclimate/php-test-reporter
   - CODECLIMATE_REPO_TOKEN=6cde41e957e7c38ff18bd750dcb9f8d72bd6bcdeeb9da466174fbb4c359e92d1 vendor/bin/test-reporter --stdout > codeclimate.json
