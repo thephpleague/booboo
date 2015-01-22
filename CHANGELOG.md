@@ -1,5 +1,20 @@
 # BooBoo Changelog
 
+## 0.4.1
+* Added a handler for passing messages to Sentry with Raven.
+* Fixed bug that caused exceptions to be thrown in shutdown function.
+* Unknown errors (errors that don't match a predefined constant) are now considered "Unknown Errors".
+* Moved Raven to a dev dependency, and suggested it for installation in Composer.
+
+## 0.4.0
+* Changed text of error message from "Error" to "Fatal Error".
+* Added handling for E_PARSE errors.
+* Set display_errors = Off if they are on, to ensure that fatal errors are handled by BooBoo.
+* Documentation improvements.
+
+## 0.3.0
+* Added a shutdown handler to deal with fatal conditions.
+
 ## 0.2.0
 
 * Changed project name to BooBoo.
