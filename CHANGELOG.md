@@ -1,5 +1,8 @@
 # BooBoo Changelog
 
+## MASTER
+* Added E_PARSE to list of fatal errors, since it is one.
+
 ## 0.4.1
 * Added a handler for passing messages to Sentry with Raven.
 * Fixed bug that caused exceptions to be thrown in shutdown function.

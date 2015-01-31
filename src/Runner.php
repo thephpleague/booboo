@@ -77,7 +77,7 @@ class Runner
             $this->pushHandler($handler);
         }
 
-        $this->fatalErrors = E_ERROR | E_USER_ERROR | E_COMPILE_ERROR | E_CORE_ERROR;
+        $this->fatalErrors = E_ERROR | E_USER_ERROR | E_COMPILE_ERROR | E_CORE_ERROR | E_PARSE;
     }
 
     /**
