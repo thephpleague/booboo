@@ -2,6 +2,7 @@
 
 ## MASTER
 * Added E_PARSE to list of fatal errors, since it is one.
+* Moved the ini_set() call to the register function, so that we don't silence errors until we register BooBoo.
 
 ## 0.4.1
 * Added a handler for passing messages to Sentry with Raven.

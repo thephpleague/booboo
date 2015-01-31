@@ -64,9 +64,6 @@ class Runner
         // Let's honor the INI settings.
         if (ini_get('display_errors') == false) {
             $this->silenceAllErrors(true);
-        } else {
-            // We want the formaters we register to handle the errors.
-            ini_set('display_errors', false);
         }
 
         foreach ($formatters as $formatter) {
@@ -175,6 +172,9 @@ class Runner
                 'No formatters were registered before attempting to register the error handler'
             );
         }
+
+        // We want the formaters we register to handle the errors.
+        ini_set('display_errors', false);
 
         set_error_handler(array($this, self::ERROR_HANDLER));
         set_exception_handler(array($this, self::EXCEPTION_HANDLER));
