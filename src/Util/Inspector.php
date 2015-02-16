@@ -96,7 +96,7 @@ class Inspector
         if ($this->frames === null) {
             $frames = $this->exception->getTrace();
 
-            // If we're handling an ErrorException thrown by Whoops,
+            // If we're handling an ErrorException thrown by BooBoo,
             // get rid of the last frame, which matches the handleError method,
             // and do not add the current exception to trace. We ensure that
             // the next frame does have a filename / linenumber, though.

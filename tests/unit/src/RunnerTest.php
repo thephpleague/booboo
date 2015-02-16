@@ -1,8 +1,22 @@
 <?php
 
-use Savage\BooBoo\Runner;
+namespace Savage\BooBoo;
+
 use Savage\BooBoo\Formatter;
 use Savage\BooBoo\Handler;
+use Mockery;
+
+function error_get_last()
+{
+    global $errorType;
+
+    return [
+        'type' => $errorType,
+        'message' => 'error in file',
+        'file' => 'test.php',
+        'line' => 8,
+    ];
+}
 
 class RunnerExt extends Runner {
 
@@ -22,7 +36,7 @@ class RunnerExt extends Runner {
 
 }
 
-class RunnerTest extends PHPUnit_Framework_TestCase {
+class RunnerTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * @var Runner
@@ -45,7 +59,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException Savage\BooBoo\Exception\NoFormattersRegisteredException
+     * @expectedException \Savage\BooBoo\Exception\NoFormattersRegisteredException
      */
     public function testNoFormatterRaisesException() {
         $runner = new Runner;
@@ -164,7 +178,10 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testRegisterAndDeregister() {
-        $runner = new RunnerExt([Mockery::mock('Savage\BooBoo\Formatter\FormatterInterface')]);
+        $formatter = Mockery::mock('Savage\BooBoo\Formatter\FormatterInterface');
+        $formatter->shouldIgnoreMissing();
+
+        $runner = new RunnerExt([$formatter]);
 
         $runner->register();
         $this->assertTrue($runner->registered);
@@ -197,6 +214,22 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
         $handler->shouldReceive('handle')->once()->with(Mockery::type('Exception'));
 
         $runner->pushHandler($handler);
-        $runner->exceptionHandler(new Exception);
+        $runner->exceptionHandler(new \Exception);
+    }
+
+    public function testShutdownHandler()
+    {
+        $this->formatter->shouldReceive('getErrorLimit')->andReturn(E_ERROR);
+        $this->formatter->shouldReceive('format');
+        $errorType = E_ERROR;
+        $this->runner->shutdownHandler();
+    }
+
+    public function testShutdownHandlerIgnoresNonfatal()
+    {
+        $this->formatter->shouldNotHaveReceived('getErrorLimit');
+        $this->formatter->shouldNotHaveReceived('format');
+        $errorType = E_NOTICE;
+        $this->runner->shutdownHandler();
     }
 }
