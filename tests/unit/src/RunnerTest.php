@@ -8,10 +8,8 @@ use Mockery;
 
 function error_get_last()
 {
-    global $errorType;
-
     return [
-        'type' => $errorType,
+        'type' => RunnerExt::$LAST_ERROR,
         'message' => 'error in file',
         'file' => 'test.php',
         'line' => 8,
@@ -19,6 +17,8 @@ function error_get_last()
 }
 
 class RunnerExt extends Runner {
+
+    static public $LAST_ERROR = E_ERROR;
 
     public function getSilence() {
         return $this->silenceErrors;
@@ -32,6 +32,11 @@ class RunnerExt extends Runner {
     public function deregister() {
         parent::deregister();
         $this->registered = false;
+    }
+
+    protected function terminate()
+    {
+        return;
     }
 
 }
@@ -219,17 +224,26 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 
     public function testShutdownHandler()
     {
-        $this->formatter->shouldReceive('getErrorLimit')->andReturn(E_ERROR);
-        $this->formatter->shouldReceive('format');
-        $errorType = E_ERROR;
-        $this->runner->shutdownHandler();
+
+        $formatter = Mockery::mock('Savage\BooBoo\Formatter\FormatterInterface');
+        $formatter->shouldReceive('getErrorLimit')->andReturn(E_ERROR);
+        $formatter->shouldReceive('format');
+
+        $runner = new RunnerExt([$formatter]);
+        $runner->shutdownHandler();
     }
+
 
     public function testShutdownHandlerIgnoresNonfatal()
     {
-        $this->formatter->shouldNotHaveReceived('getErrorLimit');
-        $this->formatter->shouldNotHaveReceived('format');
-        $errorType = E_NOTICE;
-        $this->runner->shutdownHandler();
+        RunnerExt::$LAST_ERROR = E_WARNING;
+        $formatter = Mockery::mock('Savage\BooBoo\Formatter\FormatterInterface');
+        $formatter->shouldNotHaveReceived('getErrorLimit');
+        $formatter->shouldNotHaveReceived('format');
+
+        $runner = new RunnerExt([$formatter]);
+        $runner->shutdownHandler();
+
+        RunnerExt::$LAST_ERROR = E_ERROR;
     }
 }

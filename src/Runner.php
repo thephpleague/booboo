@@ -93,7 +93,7 @@ class Runner
         // Only handle errors that match the error reporting level.
         if (!($errno & error_reporting())) { // bitwise operation
             if ($errno & $this->fatalErrors) {
-                exit(1);
+                $this->terminate();
             }
             return true;
         }
@@ -108,8 +108,13 @@ class Runner
 
         // Fatal errors should be fatal
         if ($errno & $this->fatalErrors) {
-            exit(1);
+            $this->terminate();
         }
+    }
+
+    protected function terminate()
+    {
+        exit(1);
     }
 
     /**
