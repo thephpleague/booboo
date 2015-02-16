@@ -186,4 +186,17 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
             $this->fail($e->getMessage());
         }
     }
+
+    public function testHandlersAreRun()
+    {
+        $runner = new Runner;
+
+        $this->assertEmpty($runner->getHandlers());
+
+        $handler = Mockery::mock('Savage\BooBoo\Handler\HandlerInterface');
+        $handler->shouldReceive('handle')->once()->with(Mockery::type('Exception'));
+
+        $runner->pushHandler($handler);
+        $runner->exceptionHandler(new Exception);
+    }
 }

@@ -28,6 +28,7 @@ class AbstractFormatterTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('Fatal Error', $formatter->getSeverity(E_USER_ERROR));
         $this->assertEquals('Fatal Error', $formatter->getSeverity(E_CORE_ERROR));
         $this->assertEquals('Fatal Error', $formatter->getSeverity(E_COMPILE_ERROR));
+        $this->assertEquals('Parse Error', $formatter->getSeverity(E_PARSE));
         $this->assertEquals('Warning', $formatter->getSeverity(E_WARNING));
         $this->assertEquals('Warning', $formatter->getSeverity(E_USER_WARNING));
         $this->assertEquals('Warning', $formatter->getSeverity(E_CORE_WARNING));
