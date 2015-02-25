@@ -1,5 +1,5 @@
 {
-    "name": "brandonsavage/booboo",
+    "name": "league/booboo",
     "type": "library",
     "description": "Provides an error handler for PHP that can execute a stack of handlers for various purposes.",
     "license": "MIT",
