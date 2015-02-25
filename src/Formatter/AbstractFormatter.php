@@ -1,6 +1,6 @@
 <?php
 
-namespace Savage\BooBoo\Formatter;
+namespace League\BooBoo\Formatter;
 
 abstract class AbstractFormatter implements FormatterInterface
 {

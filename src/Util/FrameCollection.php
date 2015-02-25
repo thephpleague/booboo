@@ -4,7 +4,7 @@
  * @author Filipe Dobreira <http://github.com/filp>
  */
 
-namespace Savage\BooBoo\Util;
+namespace League\BooBoo\Util;
 
 use ArrayAccess;
 use ArrayIterator;

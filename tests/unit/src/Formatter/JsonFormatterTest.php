@@ -1,6 +1,6 @@
 <?php
 
-use Savage\BooBoo\Formatter\JsonFormatter;
+use League\BooBoo\Formatter\JsonFormatter;
 
 class JsonFormatterTest extends PHPUnit_Framework_TestCase {
 

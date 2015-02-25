@@ -1,6 +1,6 @@
 <?php
 
-use Savage\BooBoo\Handler\RavenHandler;
+use League\BooBoo\Handler\RavenHandler;
 
 class RavenHandlerTest extends PHPUnit_Framework_TestCase
 {

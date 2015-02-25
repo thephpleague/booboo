@@ -1,8 +1,8 @@
 <?php
 
-namespace Savage\BooBoo\Formatter;
+namespace League\BooBoo\Formatter;
 
-use Savage\BooBoo\Util;
+use League\BooBoo\Util;
 
 class HtmlFormatter extends AbstractFormatter
 {

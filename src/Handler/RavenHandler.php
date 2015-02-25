@@ -1,9 +1,9 @@
 <?php
 
-namespace Savage\BooBoo\Handler;
+namespace League\BooBoo\Handler;
 
 use \Exception;
-use Savage\BooBoo\Handler\HandlerInterface;
+use League\BooBoo\Handler\HandlerInterface;
 
 class RavenHandler implements HandlerInterface
 {

@@ -5,11 +5,11 @@
  * @author Brandon Savage <http://github.com/brandonsavage>
  */
 
-namespace Savage\BooBoo\Util;
+namespace League\BooBoo\Util;
 
 use Exception;
 use ErrorException;
-use Savage\BooBoo\Util;
+use League\BooBoo\Util;
 
 class Inspector
 {

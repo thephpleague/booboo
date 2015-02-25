@@ -8,14 +8,14 @@ class FrameCollectionTest extends PHPUnit_Framework_TestCase
     protected $exception;
 
     /**
-     * @var \Savage\BooBoo\Util\FrameCollection
+     * @var \League\BooBoo\Util\FrameCollection
      */
     protected $container;
 
     protected function setUp()
     {
         $this->exception = new Exception;
-        $this->container = new \Savage\BooBoo\Util\FrameCollection($this->exception->getTrace());
+        $this->container = new \League\BooBoo\Util\FrameCollection($this->exception->getTrace());
     }
 
     public function testFrameOffsetFunctions()
@@ -23,7 +23,7 @@ class FrameCollectionTest extends PHPUnit_Framework_TestCase
         $collection = $this->container;
         $this->assertTrue((bool)$collection->offsetExists(0));
         $this->assertFalse((bool)$collection->offsetExists(4000));
-        $this->assertInstanceOf('Savage\BooBoo\Util\Frame', $collection->offsetGet(0));
+        $this->assertInstanceOf('League\BooBoo\Util\Frame', $collection->offsetGet(0));
     }
 
     public function testFrameCountIsAccurate()

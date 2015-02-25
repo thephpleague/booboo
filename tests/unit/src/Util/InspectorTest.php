@@ -3,7 +3,7 @@
 class InspectorText extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var \Savage\BooBoo\Util\Inspector
+     * @var \League\BooBoo\Util\Inspector
      */
     protected $inspector;
 
@@ -15,7 +15,7 @@ class InspectorText extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->exception = new ErrorException('test message');
-        $this->inspector = new \Savage\BooBoo\Util\Inspector($this->exception);
+        $this->inspector = new \League\BooBoo\Util\Inspector($this->exception);
     }
 
     public function testGetters()

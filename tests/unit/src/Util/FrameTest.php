@@ -1,6 +1,6 @@
 <?php
 
-use Savage\BooBoo\Util\Frame;
+use League\BooBoo\Util\Frame;
 
 class FrameTest extends PHPUnit_Framework_TestCase {
 

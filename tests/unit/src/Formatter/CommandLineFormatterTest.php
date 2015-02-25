@@ -1,6 +1,6 @@
 <?php
 
-use \Savage\BooBoo\Formatter\CommandLineFormatter;
+use \League\BooBoo\Formatter\CommandLineFormatter;
 
 class CommandLineFormatterText extends PHPUnit_Framework_TestCase
 {

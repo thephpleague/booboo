@@ -1,6 +1,6 @@
 <?php
 
-use Savage\BooBoo\Formatter\HtmlFormatter;
+use League\BooBoo\Formatter\HtmlFormatter;
 
 class HtmlFormatterTest extends PHPUnit_Framework_TestCase {
 

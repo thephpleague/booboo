@@ -1,6 +1,6 @@
 <?php
 
-use Savage\BooBoo\Formatter;
+use League\BooBoo\Formatter;
 
 class NullFormatterTest extends PHPUnit_Framework_TestCase {
 

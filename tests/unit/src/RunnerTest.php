@@ -1,9 +1,9 @@
 <?php
 
-namespace Savage\BooBoo;
+namespace League\BooBoo;
 
-use Savage\BooBoo\Formatter;
-use Savage\BooBoo\Handler;
+use League\BooBoo\Formatter;
+use League\BooBoo\Handler;
 use Mockery;
 
 function error_get_last()
@@ -58,13 +58,13 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
         ini_set('display_errors', true);
         $this->runner = new Runner;
 
-        $this->formatter = Mockery::mock('Savage\BooBoo\Formatter\AbstractFormatter');
-        $this->handler = Mockery::mock('Savage\BooBoo\Handler\HandlerInterface');
+        $this->formatter = Mockery::mock('League\BooBoo\Formatter\AbstractFormatter');
+        $this->handler = Mockery::mock('League\BooBoo\Handler\HandlerInterface');
         $this->runner->pushFormatter($this->formatter);
     }
 
     /**
-     * @expectedException \Savage\BooBoo\Exception\NoFormattersRegisteredException
+     * @expectedException \League\BooBoo\Exception\NoFormattersRegisteredException
      */
     public function testNoFormatterRaisesException() {
         $runner = new Runner;
@@ -76,11 +76,11 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 
         $this->assertEmpty($runner->getHandlers());
 
-        $runner->pushHandler(Mockery::mock('Savage\BooBoo\Handler\HandlerInterface'));
-        $runner->pushHandler(Mockery::mock('Savage\BooBoo\Handler\HandlerInterface'));
+        $runner->pushHandler(Mockery::mock('League\BooBoo\Handler\HandlerInterface'));
+        $runner->pushHandler(Mockery::mock('League\BooBoo\Handler\HandlerInterface'));
 
         $this->assertEquals(2, count($runner->getHandlers()));
-        $this->assertInstanceOf('Savage\BooBoo\Handler\HandlerInterface', $runner->popHandler());
+        $this->assertInstanceOf('League\BooBoo\Handler\HandlerInterface', $runner->popHandler());
         $this->assertEquals(1, count($runner->getHandlers()));
 
         $runner->clearHandlers();
@@ -92,11 +92,11 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 
         $this->assertEmpty($runner->getFormatters());
 
-        $runner->pushFormatter(Mockery::mock('Savage\BooBoo\Formatter\FormatterInterface'));
-        $runner->pushFormatter(Mockery::mock('Savage\BooBoo\Formatter\FormatterInterface'));
+        $runner->pushFormatter(Mockery::mock('League\BooBoo\Formatter\FormatterInterface'));
+        $runner->pushFormatter(Mockery::mock('League\BooBoo\Formatter\FormatterInterface'));
 
         $this->assertEquals(2, count($runner->getFormatters()));
-        $this->assertInstanceOf('Savage\BooBoo\Formatter\FormatterInterface', $runner->popFormatter());
+        $this->assertInstanceOf('League\BooBoo\Formatter\FormatterInterface', $runner->popFormatter());
         $this->assertEquals(1, count($runner->getFormatters()));
 
         $runner->clearFormatters();
@@ -106,11 +106,11 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
     public function testConstructorAssignsHandlersAndFormatters() {
         $runner = new Runner(
             [
-                Mockery::mock('Savage\BooBoo\Formatter\FormatterInterface'),
-                Mockery::mock('Savage\BooBoo\Formatter\FormatterInterface'),
+                Mockery::mock('League\BooBoo\Formatter\FormatterInterface'),
+                Mockery::mock('League\BooBoo\Formatter\FormatterInterface'),
             ],
             [
-                Mockery::mock('Savage\BooBoo\Handler\HandlerInterface'),
+                Mockery::mock('League\BooBoo\Handler\HandlerInterface'),
             ]
         );
 
@@ -119,7 +119,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function testErrorsSilencedWhenSilenceTrue() {
-        $formatter = Mockery::mock('Savage\BooBoo\Formatter\FormatterInterface');
+        $formatter = Mockery::mock('League\BooBoo\Formatter\FormatterInterface');
         $formatter->shouldReceive('getErrorLimit')->never();
         $formatter->shouldReceive('format')->never();
 
@@ -183,7 +183,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function testRegisterAndDeregister() {
-        $formatter = Mockery::mock('Savage\BooBoo\Formatter\FormatterInterface');
+        $formatter = Mockery::mock('League\BooBoo\Formatter\FormatterInterface');
         $formatter->shouldIgnoreMissing();
 
         $runner = new RunnerExt([$formatter]);
@@ -215,7 +215,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 
         $this->assertEmpty($runner->getHandlers());
 
-        $handler = Mockery::mock('Savage\BooBoo\Handler\HandlerInterface');
+        $handler = Mockery::mock('League\BooBoo\Handler\HandlerInterface');
         $handler->shouldReceive('handle')->once()->with(Mockery::type('Exception'));
 
         $runner->pushHandler($handler);
@@ -225,7 +225,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
     public function testShutdownHandler()
     {
 
-        $formatter = Mockery::mock('Savage\BooBoo\Formatter\FormatterInterface');
+        $formatter = Mockery::mock('League\BooBoo\Formatter\FormatterInterface');
         $formatter->shouldReceive('getErrorLimit')->andReturn(E_ERROR);
         $formatter->shouldReceive('format');
 
@@ -237,7 +237,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
     public function testShutdownHandlerIgnoresNonfatal()
     {
         RunnerExt::$LAST_ERROR = E_WARNING;
-        $formatter = Mockery::mock('Savage\BooBoo\Formatter\FormatterInterface');
+        $formatter = Mockery::mock('League\BooBoo\Formatter\FormatterInterface');
         $formatter->shouldNotHaveReceived('getErrorLimit');
         $formatter->shouldNotHaveReceived('format');
 

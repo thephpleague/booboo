@@ -1,6 +1,6 @@
 <?php
 
-namespace Savage\BooBoo\Exception;
+namespace League\BooBoo\Exception;
 
 class NoFormattersRegisteredException extends \Exception
 {

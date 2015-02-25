@@ -1,6 +1,6 @@
 <?php
 
-use Savage\BooBoo\Handler\LogHandler;
+use League\BooBoo\Handler\LogHandler;
 
 class LogHandlerTest extends PHPUnit_Framework_TestCase {
 

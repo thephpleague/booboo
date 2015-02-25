@@ -1,6 +1,6 @@
 <?php
 
-namespace Savage\BooBoo\Handler;
+namespace League\BooBoo\Handler;
 
 interface HandlerInterface
 {

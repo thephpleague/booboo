@@ -1,9 +1,9 @@
 <?php
 
-namespace Savage\BooBoo;
+namespace League\BooBoo;
 
-use Savage\BooBoo\Formatter;
-use Savage\BooBoo\Handler;
+use League\BooBoo\Formatter;
+use League\BooBoo\Handler;
 
 class Runner
 {
