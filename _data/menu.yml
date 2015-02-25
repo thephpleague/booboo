@@ -1,0 +1,10 @@
+Getting Started:
+    Introduction: '/'
+    Changelog: '/changelog/'
+    'Advantages': '/advantages/'
+    'Installing BooBoo': '/installing-booboo/'
+    'Dependencies': '/dependencies/'
+Using BooBoo:
+    'Instantiating BooBoo': '/instantiation/'
+    'Using Formatters': '/formatters/'
+    'Using Handlers': '/handlers/'
