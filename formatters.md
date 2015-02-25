@@ -34,8 +34,8 @@ the formatting for other error types. Formatters support this.
 For example, if you want all errors of warning or higher to show in the browser, but errors that are below this level
 to be ignored, you can configure the formatters to handle this scenario as such:
 
-```$html = new Savage\BooBoo\Formatter\HtmlFormatter;
-$null = new Savage\BooBoo\Formatter\NullFormatter;
+```$html = new League\BooBoo\Formatter\HtmlFormatter;
+$null = new League\BooBoo\Formatter\NullFormatter;
 
 $html->setErrorLimit(E_ERROR | E_WARNING | E_USER_ERROR | E_USER_WARNING);
 $null->setErrorLimit(E_ALL);

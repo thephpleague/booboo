@@ -10,7 +10,7 @@ The main object that you need to instantiate is Savage\BooBoo\Runner. This objec
 handler, as well as handling errors and exceptions. It takes optional arguments during construction for handlers and
 formatters.
 
-```$runner = new Savage\BooBoo\Runner();
+```$runner = new League\BooBoo\Runner();
 $runner->register(); // Registers the handlers
 ```
 
