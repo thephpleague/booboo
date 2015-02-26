@@ -2,8 +2,11 @@
 
 namespace League\BooBoo;
 
-use League\BooBoo\Formatter;
-use League\BooBoo\Handler;
+use ErrorException;
+use Exception;
+use League\BooBoo\Exception\NoFormattersRegisteredException;
+use League\BooBoo\Formatter\FormatterInterface;
+use League\BooBoo\Handler\HandlerInterface;
 
 class Runner
 {
@@ -85,6 +88,8 @@ class Runner
      * @param $errstr
      * @param $errfile
      * @param $errline
+     *
+     * @return bool
      * @throws \ErrorException
      */
     public function errorHandler($errno, $errstr, $errfile, $errline)
@@ -97,7 +102,7 @@ class Runner
             return true;
         }
 
-        $e = new \ErrorException($errstr, 0, $errno, $errfile, $errline);
+        $e = new ErrorException($errstr, 0, $errno, $errfile, $errline);
 
         if ($this->throwErrorsAsExceptions) {
             throw $e;
@@ -122,7 +127,7 @@ class Runner
      *
      * @param \Exception $e
      */
-    public function exceptionHandler(\Exception $e)
+    public function exceptionHandler(Exception $e)
     {
         $this->runHandlers($e);
 
@@ -133,7 +138,7 @@ class Runner
 
         if ($this->silenceErrors &&
             isset($this->errorPage) &&
-            !($e instanceof \ErrorException)
+            !($e instanceof ErrorException)
         ) {
             ob_start();
             $response = $this->errorPage->format($e);
@@ -167,12 +172,12 @@ class Runner
      * Registers the error handlers, and is required to be called before the
      * error handling code is effective.
      *
-     * @throws Exception\NoFormattersRegisteredException
+     * @throws \League\BooBoo\Exception\NoFormattersRegisteredException
      */
     public function register()
     {
         if (empty($this->formatterStack)) {
-            throw new Exception\NoFormattersRegisteredException(
+            throw new NoFormattersRegisteredException(
                 'No formatters were registered before attempting to register the error handler'
             );
         }
@@ -188,10 +193,10 @@ class Runner
     /**
      * Add a new handler to the stack.
      *
-     * @param Handler\HandlerInterface $handler
+     * @param \League\BooBoo\Handler\HandlerInterface $handler
      * @return $this
      */
-    public function pushHandler(Handler\HandlerInterface $handler)
+    public function pushHandler(HandlerInterface $handler)
     {
         $this->handlerStack[] = $handler;
         return $this;
@@ -200,7 +205,7 @@ class Runner
     /**
      * Remove an error handler from the bottom of the stack.
      *
-     * @return Handler\HandlerInterface|null
+     * @return \League\BooBoo\Handler\HandlerInterface|null
      */
     public function popHandler()
     {
@@ -231,10 +236,10 @@ class Runner
     /**
      * Adds a new formatter to the formatter stack.
      *
-     * @param Formatter\FormatterInterface $formatter
+     * @param \League\BooBoo\Formatter\FormatterInterface $formatter
      * @return $this
      */
-    public function pushFormatter(Formatter\FormatterInterface $formatter)
+    public function pushFormatter(FormatterInterface $formatter)
     {
         $this->formatterStack[] = $formatter;
         return $this;
@@ -243,7 +248,7 @@ class Runner
     /**
      * Pops a formatter off the bottom of the formatter stack.
      *
-     * @return Formatter\FormatterInterface|null
+     * @return \League\BooBoo\Formatter\FormatterInterface|null
      */
     public function popFormatter()
     {
@@ -277,10 +282,9 @@ class Runner
      * @param \Exception $e
      * @return \Exception
      */
-    protected function runHandlers(\Exception $e)
+    protected function runHandlers(Exception $e)
     {
-
-        /** @var Handler\HandlerInterface $handler */
+        /** @var \League\BooBoo\Handler\HandlerInterface $handler */
         foreach (array_reverse($this->handlerStack) as $handler) {
             $handler->handle($e);
         }
@@ -288,17 +292,20 @@ class Runner
         return $e;
     }
 
-    protected function runFormatters(\Exception $e)
+    /**
+     * @param \Exception $e
+     *
+     * @return mixed
+     */
+    protected function runFormatters(Exception $e)
     {
-        $string = '';
-
-        if ($e instanceof \ErrorException) {
+        if ($e instanceof ErrorException) {
             $severity = $e->getSeverity();
         } else {
             $severity = E_ERROR;
         }
 
-        /** @var Formatter\FormatterInterface $formatter */
+        /** @var \League\BooBoo\Formatter\FormatterInterface $formatter */
         foreach (array_reverse($this->formatterStack) as $formatter) {
             if ($severity & $formatter->getErrorLimit()) {
                 return $formatter->format($e);
@@ -309,7 +316,7 @@ class Runner
     /**
      * Silences all errors.
      *
-     * @param $bool
+     * @param bool $bool
      */
     public function silenceAllErrors($bool)
     {
@@ -330,9 +337,9 @@ class Runner
     /**
      * Registers an error page for handling uncaught exceptions in production.
      *
-     * @param Formatter\FormatterInterface $errorPage
+     * @param \League\BooBoo\Formatter\FormatterInterface $errorPage
      */
-    public function setErrorPageFormatter(Formatter\FormatterInterface $errorPage)
+    public function setErrorPageFormatter(FormatterInterface $errorPage)
     {
         $this->errorPage = $errorPage;
     }
@@ -341,7 +348,7 @@ class Runner
      * Allows the user to explicitly require errors to be thrown as exceptions. This
      * makes all errors blocking, even if they are minor (e.g. E_NOTICE, E_WARNING).
      *
-     * @param $bool
+     * @param bool $bool
      */
     public function treatErrorsAsExceptions($bool)
     {
