@@ -45,7 +45,7 @@ class JsonFormatter extends AbstractFormatter
             'message' => $message,
             'file' => $file,
             'line' => $line,
-            'trace' => $trace
+            'trace' => $trace,
         ];
 
         if ($e->getPrevious()) {
