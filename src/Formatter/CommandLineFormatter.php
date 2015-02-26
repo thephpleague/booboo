@@ -4,7 +4,6 @@ namespace League\BooBoo\Formatter;
 
 class CommandLineFormatter extends AbstractFormatter
 {
-
     public function format(\Exception $e)
     {
         if ($e instanceof \ErrorException) {

@@ -54,7 +54,6 @@ class Runner
      */
     protected $fatalErrors;
 
-
     /**
      * @param array $formatters
      * @param array $handlers
