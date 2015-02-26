@@ -25,12 +25,12 @@ class Runner
     /**
      * @var array Handler stack array
      */
-    protected $handlerStack = array();
+    protected $handlerStack = [];
 
     /**
      * @var array Formatter stack array
      */
-    protected $formatterStack = array();
+    protected $formatterStack = [];
 
     /**
      * @var bool Whether or not we should silence all errors.
@@ -180,9 +180,9 @@ class Runner
         // We want the formaters we register to handle the errors.
         ini_set('display_errors', false);
 
-        set_error_handler(array($this, self::ERROR_HANDLER));
-        set_exception_handler(array($this, self::EXCEPTION_HANDLER));
-        register_shutdown_function(array($this, self::SHUTDOWN_HANDLER));
+        set_error_handler([$this, self::ERROR_HANDLER]);
+        set_exception_handler([$this, self::EXCEPTION_HANDLER]);
+        register_shutdown_function([$this, self::SHUTDOWN_HANDLER]);
     }
 
     /**
@@ -224,7 +224,7 @@ class Runner
      */
     public function clearHandlers()
     {
-        $this->handlerStack = array();
+        $this->handlerStack = [];
         return $this;
     }
 
@@ -267,7 +267,7 @@ class Runner
      */
     public function clearFormatters()
     {
-        $this->formatterStack = array();
+        $this->formatterStack = [];
         return $this;
     }
 
