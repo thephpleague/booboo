@@ -2,7 +2,7 @@
 
 ## Quality
 
-[![Build Status](https://travis-ci.org/brandonsavage/booboo.svg?branch=master)](https://travis-ci.org/brandonsavage/booboo)
+[![Build Status](https://travis-ci.org/thephpleague/booboo.svg?branch=master)](https://travis-ci.org/thephpleague/booboo)
 [![Code Climate](https://codeclimate.com/github/brandonsavage/booboo/badges/gpa.svg)](https://codeclimate.com/github/brandonsavage/booboo)
 [![Test Coverage](https://codeclimate.com/github/brandonsavage/booboo/badges/coverage.svg)](https://codeclimate.com/github/brandonsavage/booboo)
 
