@@ -2,14 +2,18 @@
 
 namespace League\BooBoo\Handler;
 
-use \Exception;
-use League\BooBoo\Handler\HandlerInterface;
+use ErrorException;
+use Exception;
+use Raven_Client;
 
 class RavenHandler implements HandlerInterface
 {
+    /**
+     * @var \Raven_Client
+     */
     protected $client;
 
-    public function __construct(\Raven_Client $client, $minimumLogLevel = E_ALL)
+    public function __construct(Raven_Client $client, $minimumLogLevel = E_ALL)
     {
         $this->client = $client;
         $this->minimumLogLevel = $minimumLogLevel;
@@ -17,7 +21,7 @@ class RavenHandler implements HandlerInterface
 
     public function handle(Exception $e)
     {
-        if ($e instanceof \ErrorException) {
+        if ($e instanceof ErrorException) {
             $level = $e->getSeverity();
         } else {
             $level = E_ERROR;
