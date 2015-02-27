@@ -11,7 +11,7 @@ that should fail against HHVM. However, support is not guaranteed.
 
 It is recommended that you install this library using Composer.
 
-```$ composer require brandonsavage/BooBoo```
+```$ composer require league/booboo```
 
 BooBoo is compliant with [PSR-1][], [PSR-2][], [PSR-3][] and [PSR-4][]. If you notice compliance oversights, please
 send a patch via pull request.

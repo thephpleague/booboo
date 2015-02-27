@@ -24,7 +24,9 @@ The library ships with four formatters for your convenience:
 
 Adding a formatter is easy:
 
-```$runner->pushFormatter(new Savage\BooBoo\Formatter\HtmlFormatter);```
+~~~ php
+$runner->pushFormatter(new Savage\BooBoo\Formatter\HtmlFormatter);
+~~~
 
 ## Controlling which formatter does the formatting
 
@@ -34,7 +36,8 @@ the formatting for other error types. Formatters support this.
 For example, if you want all errors of warning or higher to show in the browser, but errors that are below this level
 to be ignored, you can configure the formatters to handle this scenario as such:
 
-```$html = new League\BooBoo\Formatter\HtmlFormatter;
+~~~ php
+$html = new League\BooBoo\Formatter\HtmlFormatter;
 $null = new League\BooBoo\Formatter\NullFormatter;
 
 $html->setErrorLimit(E_ERROR | E_WARNING | E_USER_ERROR | E_USER_WARNING);
@@ -42,7 +45,7 @@ $null->setErrorLimit(E_ALL);
 
 $runner->pushFormatter($null);
 $runner->pushFormatter($html);
-```
+~~~
 
 ## Formatters and handlers are a stack
 
