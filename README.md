@@ -79,14 +79,14 @@ PHP is changing every year, and BooBoo will change along with it.
 
 ### Instantiation
 
-The main object that you need to instantiate is `Savage\BooBoo\Runner`. This object takes care of setting the error
+The main object that you need to instantiate is `League\BooBoo\Runner`. This object takes care of setting the error
 handler, as well as handling errors and exceptions. It takes optional arguments during construction for handlers and
 formatters.
 
 ```php
 <?php
 
-$runner = new Savage\BooBoo\Runner();
+$runner = new League\BooBoo\Runner();
 $runner->register(); // Registers the handlers
 ```
 
@@ -110,7 +110,7 @@ Adding a formatter is easy:
 ```php
 <?php
 
-$runner->pushFormatter(new Savage\BooBoo\Formatter\HtmlFormatter());
+$runner->pushFormatter(new League\BooBoo\Formatter\HtmlFormatter());
 ```
 
 ### Controlling which formater does the formatting
@@ -124,8 +124,8 @@ to be ignored, you can configure the formatters to handle this scenario as such:
 ```php
 <?php
 
-$html = new Savage\BooBoo\Formatter\HtmlFormatter();
-$null = new Savage\BooBoo\Formatter\NullFormatter();
+$html = new League\BooBoo\Formatter\HtmlFormatter();
+$null = new League\BooBoo\Formatter\NullFormatter();
 
 $html->setErrorLimit(E_ERROR | E_WARNING | E_USER_ERROR | E_USER_WARNING);
 $null->setErrorLimit(E_ALL);
