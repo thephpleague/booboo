@@ -3,7 +3,7 @@
 ## Quality
 
 [![Build Status](https://travis-ci.org/thephpleague/booboo.svg?branch=master)](https://travis-ci.org/thephpleague/booboo)
-[![Code Climate](https://codeclimate.com/github/brandonsavage/booboo/badges/gpa.svg)](https://codeclimate.com/github/brandonsavage/booboo)
+[![Code Climate](https://codeclimate.com/github/thephpleague/booboo/badges/gpa.svg)](https://codeclimate.com/github/brandonsavage/booboo)
 [![Test Coverage](https://codeclimate.com/github/brandonsavage/booboo/badges/coverage.svg)](https://codeclimate.com/github/brandonsavage/booboo)
 
 
@@ -19,7 +19,7 @@ that should fail against HHVM. However, support is not guaranteed.
 It is recommended that you install this library using Composer.
 
 ```
-$ composer require brandonsavage/BooBoo
+$ composer require league/booboo
 ```
 
 BooBoo is compliant with [PSR-1][], [PSR-2][], [PSR-3][] and [PSR-4][]. If you notice compliance oversights, please
@@ -34,7 +34,7 @@ send a patch via pull request.
 
 BooBoo relies upon and requires the following dependencies:
 
-* psr/log - A PSR-3 compliant interface for logging.
+* `psr/log` - A PSR-3 compliant interface for logging.
 
 No other dependencies are required. The maintainer recommends installing [monolog][] for logging.
 
@@ -43,13 +43,13 @@ No other dependencies are required. The maintainer recommends installing [monolo
 ## Advantages Over Existing Solutions
 
 BooBoo is designed to help make development easier while providing an integrated solution that can be deployed to
-your production environment. BooBoo offers the following advantages.
+your production environment. BooBoo offers the following advantages:
 
 ### Errors are non-blocking by default
 
 Some solutions throw exceptions for all errors, causing every notice to become a fatal error. BooBoo doesn't do this.
 Rather than raise an exception for non-fatal errors, we display the error to you in a way that makes sense and lets the
-program continue running. An E_NOTICE shouldn't become an exception.
+program continue running. An `E_NOTICE` shouldn't become an exception.
 
 The Runner object offers a method for forcing all errors to be blocking, should you wish to throw exceptions for more minor errors. This is turned off by default.
 
@@ -59,10 +59,12 @@ Because we don't throw an exception by default, we don't generate a stack trace 
 
 ### BooBoo is built for logging
 
-This solution is designed with logging in mind, so that you can plug and play a PSR-3 compliant logging solution in and
+This solution is designed with logging in mind, so that you can plug and play a [PSR-3][] compliant logging solution in and
 go. BooBoo is sensitive enough to log errors, warnings and notices as such; exceptions are logged as critical, and
-E_STRICT/E_DEPRECATED warnings are logged as info. Handlers run even if formatting is disabled, so your logging will
+`E_STRICT`/`E_DEPRECATED` warnings are logged as info. Handlers run even if formatting is disabled, so your logging will
 always be on, even in production.
+
+[PSR-3]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md
 
 ### BooBoo is designed for extension
 
@@ -78,7 +80,7 @@ PHP is changing every year, and BooBoo will change along with it.
 
 ### Instantiation
 
-The main object that you need to instantiate is Savage\BooBoo\Runner. This object takes care of setting the error
+The main object that you need to instantiate is `Savage\BooBoo\Runner`. This object takes care of setting the error
 handler, as well as handling errors and exceptions. It takes optional arguments during construction for handlers and
 formatters.
 
@@ -89,7 +91,7 @@ $runner = new Savage\BooBoo\Runner();
 $runner->register(); // Registers the handlers
 ```
 
-It's very important to call Runner::register() or the object won't register itself as PHP's error handler.
+It's very important to call `Runner::register()` or the object won't register itself as PHP's error handler.
 
 ### Formatters are very important!
 
@@ -99,17 +101,17 @@ an exception and won't register the error handlers.
 
 The library ships with four formatters for your convenience:
 
-* HtmlFormatter - Formats errors just like PHP's error formatting.
-* HtmlTableFormatter - Formats errors and exceptions similar to Xdebug, wth a full stack trace, even for errors.
-* JsonFormatter - Perfect for displaying errors to an API.
-* CommandLineFormatter - Working with the command line? This will produce pretty command-line errors.
-* NullFormatter - This formatter simply silences all errors. You can pass this when display_errors = Off.
+* `HtmlFormatter` - Formats errors just like PHP's error formatting.
+* `HtmlTableFormatter` - Formats errors and exceptions similar to Xdebug, wth a full stack trace, even for errors.
+* `JsonFormatter` - Perfect for displaying errors to an API.
+* `CommandLineFormatter` - Working with the command line? This will produce pretty command-line errors.
+* `NullFormatter` - This formatter simply silences all errors. You can pass this when display_errors = Off.
 Adding a formatter is easy:
 
 ```php
 <?php
 
-$runner->pushFormatter(new Savage\BooBoo\Formatter\HtmlFormatter);
+$runner->pushFormatter(new Savage\BooBoo\Formatter\HtmlFormatter());
 ```
 
 ### Controlling which formater does the formatting
@@ -123,8 +125,8 @@ to be ignored, you can configure the formatters to handle this scenario as such:
 ```php
 <?php
 
-$html = new Savage\BooBoo\Formatter\HtmlFormatter;
-$null = new Savage\BooBoo\Formatter\NullFormatter;
+$html = new Savage\BooBoo\Formatter\HtmlFormatter();
+$null = new Savage\BooBoo\Formatter\NullFormatter();
 
 $html->setErrorLimit(E_ERROR | E_WARNING | E_USER_ERROR | E_USER_WARNING);
 $null->setErrorLimit(E_ALL);
@@ -145,8 +147,10 @@ errors, and we would get no output.
 ### Handlers
 
 Regardless of whether or not you want to format the error (or even output it to the screen), you may want to handle it
-in some way, such as logging it. BooBoo provides a way to handle errors, and provides a built-in PSR-3 compatible
+in some way, such as logging it. BooBoo provides a way to handle errors, and provides a built-in [PSR-3][] compatible
 logging handler.
+
+[PSR-3]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md
 
 You can implement the HandlerInterface to create your own handlers. Handlers are run regardless of whether or not
 display_errors is true. Unlike formatters, you cannot direct handlers to ignore certain errors; it's assumed that you
