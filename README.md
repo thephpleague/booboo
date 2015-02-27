@@ -157,7 +157,7 @@ can handle this with the services that handlers work through.
 
 # Documentation
 
-[Check out the documentation here]: http://booboo.thephpleague.com/
+[Check out the documentation here](http://booboo.thephpleague.com/)
 
 # Security
 
