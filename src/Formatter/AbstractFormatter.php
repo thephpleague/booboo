@@ -4,7 +4,6 @@ namespace League\BooBoo\Formatter;
 
 abstract class AbstractFormatter implements FormatterInterface
 {
-
     protected $errorLimit = E_ALL;
 
     protected function determineSeverityTextValue($severity)

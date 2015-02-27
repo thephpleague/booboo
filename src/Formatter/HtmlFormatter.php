@@ -6,7 +6,6 @@ use League\BooBoo\Util;
 
 class HtmlFormatter extends AbstractFormatter
 {
-
     public function format(\Exception $e)
     {
         if ($e instanceof \ErrorException) {
@@ -69,7 +68,6 @@ class HtmlFormatter extends AbstractFormatter
         $fileline = ($frame->getFile() ?: '<#unknown>');
         $fileline .= ':';
         $fileline .= (int)$frame->getLine();
-
         return [$function, $fileline];
     }
 }

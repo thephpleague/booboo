@@ -4,7 +4,6 @@ namespace League\BooBoo\Handler;
 
 class LogHandler implements HandlerInterface
 {
-
     protected $logger;
 
     public function __construct(\Psr\Log\LoggerInterface $logger)
@@ -14,7 +13,6 @@ class LogHandler implements HandlerInterface
 
     public function handle(\Exception $e)
     {
-
         if ($e instanceof \ErrorException) {
             $this->handleErrorException($e);
             return;

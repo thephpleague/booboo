@@ -4,7 +4,6 @@ namespace League\BooBoo\Formatter;
 
 class JsonFormatter extends AbstractFormatter
 {
-
     public function format(\Exception $e)
     {
         if ($e instanceof \ErrorException) {
@@ -46,7 +45,7 @@ class JsonFormatter extends AbstractFormatter
             'message' => $message,
             'file' => $file,
             'line' => $line,
-            'trace' => $trace
+            'trace' => $trace,
         ];
 
         if ($e->getPrevious()) {

@@ -6,7 +6,6 @@ use League\BooBoo\Util;
 
 class HtmlTableFormatter extends AbstractFormatter
 {
-
     /**
      * @var Util\Formatter;
      */
