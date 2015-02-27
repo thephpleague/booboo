@@ -154,3 +154,11 @@ logging handler.
 You can implement the HandlerInterface to create your own handlers. Handlers are run regardless of whether or not
 display_errors is true. Unlike formatters, you cannot direct handlers to ignore certain errors; it's assumed that you
 can handle this with the services that handlers work through.
+
+# Documentation
+
+[Check out the documentation here]: http://booboo.thephpleague.com/
+
+# Security
+
+If you have identified a security issue, please email brandon@brandonsavage.net directly. Do not file an issue as they are public!
