@@ -15,7 +15,7 @@ class FrameTest extends PHPUnit_Framework_TestCase {
     protected function setUp() {
 
         $frame = [
-            'file' => 'index.php',
+            'file' => __DIR__.'/../../index.php',
             'line' => 11,
             'class' => 'ABC',
             'function' => 'ghi',
@@ -33,7 +33,7 @@ class FrameTest extends PHPUnit_Framework_TestCase {
 
     public function testGetFile() {
         $file = $this->frame->getFile();
-        $this->assertEquals('index.php', $file);
+        $this->assertEquals(__DIR__.'/../../index.php', $file);
     }
 
     public function testGetLine() {
@@ -53,8 +53,30 @@ class FrameTest extends PHPUnit_Framework_TestCase {
         $this->assertCount(3, $args);
     }
 
+    public function testGetFileContents()
+    {
+        $this->assertEquals("test\ncontent", $this->frame->getFileContents());
+    }
+
+    public function testComments()
+    {
+        $this->frame->addComment('Comment');
+
+        $this->assertEquals([[
+            'comment' => 'Comment',
+            'context' => 'global',
+        ]], $this->frame->getComments());
+    }
+
     public function testGetRawFrame() {
         $this->assertEquals($this->frame->getRawFrame(), $this->frameArr);
+    }
+
+    public function testGetFileLines()
+    {
+        $this->assertEquals(['test', 'content'], $this->frame->getFileLines());
+        $this->assertEquals(['test'], $this->frame->getFileLines(0, 1));
+        $this->assertEquals([1 => 'content'], $this->frame->getFileLines(1, 1));
     }
 
     public function testFramesAreEqual() {

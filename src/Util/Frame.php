@@ -17,7 +17,17 @@ class Frame implements Serializable
     protected $frame;
 
     /**
-     * @param array []
+     * @var string
+     */
+    protected $fileContentsCache;
+
+    /**
+     * @var array
+     */
+    protected $comments = [];
+
+    /**
+     * @param array $frame
      */
     public function __construct(array $frame)
     {
@@ -25,7 +35,8 @@ class Frame implements Serializable
     }
 
     /**
-     * @param  bool $shortened
+     * @param boolean $shortened
+     *
      * @return string|null
      */
     public function getFile()
@@ -49,7 +60,7 @@ class Frame implements Serializable
     }
 
     /**
-     * @return int|null
+     * @return integer|null
      */
     public function getLine()
     {
@@ -77,7 +88,66 @@ class Frame implements Serializable
      */
     public function getArgs()
     {
-        return isset($this->frame['args']) ? (array)$this->frame['args'] : array();
+        return isset($this->frame['args']) ? (array)$this->frame['args'] : [];
+    }
+
+    /**
+     * Returns the full contents of the file for this frame, if it's known
+     *
+     * @return string|null
+     */
+    public function getFileContents()
+    {
+        if ($this->fileContentsCache === null && $filePath = $this->getFile()) {
+            if ($filePath === "Unknown" || !is_file($filePath)) {
+                return null;
+            }
+
+            $this->fileContentsCache = file_get_contents($filePath);
+        }
+
+        return $this->fileContentsCache;
+    }
+
+    /**
+     * Adds a comment to this frame, that can be received and
+     * used by other handlers. For example, the PrettyPage handler
+     * can attach these comments under the code for each frame
+     *
+     * An interesting use for this would be, for example, code analysis
+     * & annotations
+     *
+     * @param string $comment
+     * @param string $context Optional string identifying the origin of the comment
+     */
+    public function addComment($comment, $context = 'global')
+    {
+        $this->comments[] = [
+            'comment' => $comment,
+            'context' => $context,
+        ];
+    }
+
+    /**
+     * Returns all comments for this frame. Optionally allows
+     * a filter to only retrieve comments from a specific
+     * context
+     *
+     * @param string $filter
+     *
+     * @return array
+     */
+    public function getComments($filter = null)
+    {
+        $comments = $this->comments;
+
+        if ($filter !== null) {
+            $comments = array_filter($comments, function ($c) use ($filter) {
+                return $c['context'] == $filter;
+            });
+        }
+
+        return $comments;
     }
 
     /**
@@ -92,39 +162,92 @@ class Frame implements Serializable
     }
 
     /**
+     * Returns the contents of the file for this frame as an
+     * array of lines, and optionally as a clamped range of lines
+     *
+     * NOTE: lines are 0-indexed
+     *
+     * @example
+     *     Get all lines for this file
+     *     $frame->getFileLines(); // => array( 0 => '<?php', 1 => '...', ...)
+     * @example
+     *     Get one line for this file, starting at line 10 (zero-indexed, remember!)
+     *     $frame->getFileLines(9, 1); // array( 10 => '...', 11 => '...')
+     *
+     * @param integer $start
+     * @param integer $length
+     *
+     * @return string[]|null
+     *
+     * @throws \InvalidArgumentException if $length is less than or equal to 0
+     */
+    public function getFileLines($start = 0, $length = null)
+    {
+        $contents = $this->getFileContents();
+
+        if (isset($contents)) {
+            $lines = explode("\n", $contents);
+            // Get a subset of lines from $start to $end
+            if ($length !== null) {
+                $start  = (int) $start;
+                $length = (int) $length;
+
+                if ($start < 0) {
+                    $start = 0;
+                }
+
+                if ($length <= 0) {
+                    throw new \InvalidArgumentException(sprintf('$length must be greater than 0'));
+                }
+
+                $lines = array_slice($lines, $start, $length, true);
+            }
+
+            return $lines;
+        }
+    }
+
+    /**
      * Implements the Serializable interface.
      *
      * @see Serializable::serialize
+     *
      * @return string
      */
     public function serialize()
     {
         $frame = $this->frame;
+
         return serialize($frame);
     }
 
     /**
      * Unserializes the frame data.
      *
-     * @see Serializable::unserialize
      * @param string $serializedFrame
+     *
+     * @see Serializable::unserialize
      */
     public function unserialize($serializedFrame)
     {
         $frame = unserialize($serializedFrame);
+
         $this->frame = $frame;
     }
 
     /**
      * Compares Frame against one another
-     * @param  Frame $frame
-     * @return bool
+     *
+     * @param Frame $frame
+     *
+     * @return boolean
      */
     public function equals(Frame $frame)
     {
         if (!$this->getFile() || $this->getFile() === 'Unknown' || !$this->getLine()) {
             return false;
         }
+
         return $frame->getFile() === $this->getFile() && $frame->getLine() === $this->getLine();
     }
 }
