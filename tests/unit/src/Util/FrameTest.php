@@ -79,6 +79,19 @@ class FrameTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals([1 => 'content'], $this->frame->getFileLines(1, 1));
     }
 
+    public function testGetFileLinesStartDefaultsZero()
+    {
+        $this->assertEquals(['test', 'content'], $this->frame->getFileLines(-100, 2));
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testGetFileLinesLengthLessThanZeroRaisesException()
+    {
+        $this->frame->getFileLines(0, -1);
+    }
+
     public function testFramesAreEqual() {
         $this->assertTrue($this->frame->equals($this->frame));
     }

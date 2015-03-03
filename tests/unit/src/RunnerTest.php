@@ -166,7 +166,15 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
         $result = $this->runner->errorHandler(E_WARNING, 'error', 'index.php', 11);
         $this->assertTrue($result);
         error_reporting(E_ALL);
+    }
 
+
+    public function testErrorReportingOffStillKillsFatalErrors() {
+        error_reporting(0);
+        $runner = new RunnerExt();
+        $result = $runner->errorHandler(E_ERROR, 'error', 'index.php', 11);
+        $this->assertTrue($result);
+        error_reporting(E_ALL);
     }
 
     public function testErrorsSilencedWhenErrorReportingOff() {
