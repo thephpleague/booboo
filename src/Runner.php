@@ -182,7 +182,7 @@ class Runner
             );
         }
 
-        // We want the formaters we register to handle the errors.
+        // We want the formatters we register to handle the errors.
         ini_set('display_errors', false);
 
         set_error_handler([$this, self::ERROR_HANDLER]);
