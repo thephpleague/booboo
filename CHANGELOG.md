@@ -1,5 +1,10 @@
 # BooBoo Changelog
 
+## Future
+* Added a CallableHandler and CallableFormatter for infinite extension options.
+* Added functionality that will make a pretty page handler easier in the future.
+* Documentation, test and code cleanup.
+
 ## 1.0.0
 * Changing the namespace to the final namespace (League) and tagging a 1.0 release.
 
