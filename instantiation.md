@@ -6,7 +6,7 @@ title: Instantiation
 
 #Instantiating BooBoo
 
-The main object that you need to instantiate is Savage\BooBoo\Runner. This object takes care of setting the error
+The main object that you need to instantiate is League\BooBoo\Runner. This object takes care of setting the error
 handler, as well as handling errors and exceptions. It takes optional arguments during construction for handlers and
 formatters.
 
