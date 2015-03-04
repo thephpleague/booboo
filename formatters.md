@@ -25,7 +25,7 @@ The library ships with four formatters for your convenience:
 Adding a formatter is easy:
 
 ~~~ php
-$runner->pushFormatter(new Savage\BooBoo\Formatter\HtmlFormatter);
+$runner->pushFormatter(new League\BooBoo\Formatter\HtmlFormatter);
 ~~~
 
 ## Controlling which formatter does the formatting
