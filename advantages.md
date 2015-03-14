@@ -4,7 +4,7 @@ permalink: advantages/
 title: Advantages
 ---
 
-#Advanages
+#Advantages
 
 BooBoo is designed to help make development easier while providing an integrated solution that can be deployed to
 your production environment. BooBoo offers the following advantages.
