@@ -112,7 +112,7 @@ Adding a formatter is easy:
 $runner->pushFormatter(new League\BooBoo\Formatter\HtmlFormatter());
 ```
 
-### Controlling which formater does the formatting
+### Controlling which formatter does the formatting
 
 There may be times that you want certain formatters to handle the formatting for particular errors, and others to handle
 the formatting for other error types. Formatters support this.
