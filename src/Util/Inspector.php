@@ -53,16 +53,9 @@ class Inspector
     }
 
     /**
-     * @return string
-     */
-    public function getExceptionMessage()
-    {
-        return $this->exception->getMessage();
-    }
-
-    /**
      * Does the wrapped Exception has a previous Exception?
-     * @return bool
+     *
+     * @return boolean
      */
     public function hasPreviousException()
     {
@@ -71,6 +64,7 @@ class Inspector
 
     /**
      * Returns an Inspector for a previous Exception, if any.
+     *
      * @return Inspector
      */
     public function getPreviousExceptionInspector()
@@ -87,8 +81,8 @@ class Inspector
     }
 
     /**
-     * Returns an iterator for the inspected exception's
-     * frames.
+     * Returns an iterator for the inspected exception's frames.
+     *
      * @return Util\FrameCollection
      */
     public function getFrames()
