@@ -7,37 +7,33 @@
 
 namespace League\BooBoo\Util;
 
-use Exception;
-use ErrorException;
-use League\BooBoo\Util;
-
 class Inspector
 {
     /**
-     * @var Exception
+     * @var \Exception
      */
     private $exception;
 
     /**
-     * @var Util\FrameCollection
+     * @var FrameCollection
      */
     private $frames;
 
     /**
-     * @var Util\Inspector
+     * @var Inspector
      */
     private $previousExceptionInspector;
 
     /**
-     * @param Exception $exception The exception to inspect
+     * @param \Exception $exception The exception to inspect
      */
-    public function __construct(Exception $exception)
+    public function __construct(\Exception $exception)
     {
         $this->exception = $exception;
     }
 
     /**
-     * @return Exception
+     * @return \Exception
      */
     public function getException()
     {
@@ -83,18 +79,18 @@ class Inspector
     /**
      * Returns an iterator for the inspected exception's frames.
      *
-     * @return Util\FrameCollection
+     * @return FrameCollection
      */
     public function getFrames()
     {
         if ($this->frames === null) {
             $frames = $this->exception->getTrace();
 
-            // If we're handling an ErrorException thrown by BooBoo,
+            // If we're handling an \ErrorException thrown by BooBoo,
             // get rid of the last frame, which matches the handleError method,
             // and do not add the current exception to trace. We ensure that
             // the next frame does have a filename / linenumber, though.
-            if ($this->exception instanceof ErrorException) {
+            if ($this->exception instanceof \ErrorException) {
                 foreach ($frames as $k => $frame) {
                     if (isset($frame['class']) &&
                         strpos($frame['class'], 'BooBoo') !== false
@@ -116,5 +112,19 @@ class Inspector
         }
 
         return $this->frames;
+    }
+
+    /**
+     * Checks if the inspector has frames
+     *
+     * Note: this essentially generates the frames (which is usually done by the first call to getFrames)
+     *
+     * @return boolean
+     */
+    public function hasFrames()
+    {
+        $frames = $this->getFrames();
+
+        return count($frames) > 0;
     }
 }
