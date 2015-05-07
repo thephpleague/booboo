@@ -1,9 +1,11 @@
 <?php
 
+use League\BooBoo\Util\Inspector;
+
 class InspectorText extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var \League\BooBoo\Util\Inspector
+     * @var Inspector
      */
     protected $inspector;
 
@@ -15,7 +17,7 @@ class InspectorText extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->exception = new ErrorException('test message');
-        $this->inspector = new \League\BooBoo\Util\Inspector($this->exception);
+        $this->inspector = new Inspector($this->exception);
     }
 
     public function testGetters()
@@ -23,7 +25,6 @@ class InspectorText extends PHPUnit_Framework_TestCase
         $inspector = $this->inspector;
         $this->assertInstanceOf('ErrorException', $inspector->getException());
         $this->assertEquals('ErrorException', $inspector->getExceptionName());
-        $this->assertEquals('test message', $inspector->getExceptionMessage());
         $this->assertFalse($inspector->hasPreviousException());
     }
 
@@ -31,5 +32,6 @@ class InspectorText extends PHPUnit_Framework_TestCase
     {
         $frames = $this->inspector->getFrames();
         $this->assertEquals(count($this->exception->getTrace()), count($frames));
+        $this->assertTrue($this->inspector->hasFrames());
     }
 }
