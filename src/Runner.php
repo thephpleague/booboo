@@ -127,7 +127,7 @@ class Runner
      *
      * @param \Exception $e
      */
-    public function exceptionHandler(Exception $e)
+    public function exceptionHandler($e)
     {
         $this->runHandlers($e);
 
@@ -282,7 +282,7 @@ class Runner
      * @param \Exception $e
      * @return \Exception
      */
-    protected function runHandlers(Exception $e)
+    protected function runHandlers($e)
     {
         /** @var \League\BooBoo\Handler\HandlerInterface $handler */
         foreach (array_reverse($this->handlerStack) as $handler) {
@@ -297,7 +297,7 @@ class Runner
      *
      * @return mixed
      */
-    protected function runFormatters(Exception $e)
+    protected function runFormatters($e)
     {
         if ($e instanceof ErrorException) {
             $severity = $e->getSeverity();

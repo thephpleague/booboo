@@ -4,7 +4,7 @@ namespace League\BooBoo\Formatter;
 
 interface FormatterInterface
 {
-    public function format(\Exception $e);
+    public function format($e);
 
     public function setErrorLimit($limit);
 

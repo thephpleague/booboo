@@ -4,7 +4,7 @@ namespace League\BooBoo\Formatter;
 
 class JsonFormatter extends AbstractFormatter
 {
-    public function format(\Exception $e)
+    public function format($e)
     {
         if ($e instanceof \ErrorException) {
             $arrays = $this->handleErrors($e);
@@ -31,7 +31,7 @@ class JsonFormatter extends AbstractFormatter
         return $error;
     }
 
-    protected function formatExceptions(\Exception $e)
+    protected function formatExceptions($e)
     {
         $type = get_class($e);
         $message = $e->getMessage();

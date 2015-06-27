@@ -4,7 +4,7 @@ namespace League\BooBoo\Formatter;
 
 class CommandLineFormatter extends AbstractFormatter
 {
-    public function format(\Exception $e)
+    public function format($e)
     {
         if ($e instanceof \ErrorException) {
             return $this->handleErrors($e);
@@ -39,7 +39,7 @@ class CommandLineFormatter extends AbstractFormatter
         return $error;
     }
 
-    protected function formatExceptions(\Exception $e)
+    protected function formatExceptions($e)
     {
         $errorString = "+---------------------+\n| UNHANDLED EXCEPTION |\n+---------------------+\n";
         $errorString .= "Fatal error: Uncaught exception '%s' with message '%s' in %s on line %d\n\n";

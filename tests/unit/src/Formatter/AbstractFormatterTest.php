@@ -11,7 +11,7 @@ use League\BooBoo\Formatter;
  */
 class AbstractFormatterExt extends Formatter\AbstractFormatter {
 
-    public function format(\Exception $e) {
+    public function format($e) {
         throw new \Exception('This method is not implemented');
     }
 

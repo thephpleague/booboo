@@ -11,7 +11,7 @@ class HtmlTableFormatter extends AbstractFormatter
      */
     protected $formatter;
 
-    public function format(\Exception $e)
+    public function format($e)
     {
         $this->inspector = new Util\Inspector($e);
 
@@ -37,7 +37,7 @@ class HtmlTableFormatter extends AbstractFormatter
         return $this->getTable($error);
     }
 
-    protected function formatExceptions(\Exception $e)
+    protected function formatExceptions($e)
     {
         $errorString = "<strong>Fatal error:</strong> Uncaught exception '%s' with message '%s' in %s on line %d";
 

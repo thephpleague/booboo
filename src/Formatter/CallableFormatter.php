@@ -22,7 +22,7 @@ class CallableFormatter extends AbstractFormatter
      * @param Exception $e
      * @return mixed
      */
-    public function format(Exception $e)
+    public function format($e)
     {
         return call_user_func($this->callable, $e);
     }

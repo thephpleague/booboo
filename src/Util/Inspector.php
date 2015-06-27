@@ -27,8 +27,11 @@ class Inspector
     /**
      * @param \Exception $exception The exception to inspect
      */
-    public function __construct(\Exception $exception)
+    public function __construct($exception)
     {
+        if (!($exception instanceof \Exception) && !($exception instanceof \Throwable)) {
+            throw new \InvalidArgumentException('The exception was not valid');
+        }
         $this->exception = $exception;
     }
 

@@ -6,7 +6,7 @@ use League\BooBoo\Util;
 
 class HtmlFormatter extends AbstractFormatter
 {
-    public function format(\Exception $e)
+    public function format($e)
     {
         if ($e instanceof \ErrorException) {
             return $this->handleErrors($e);
@@ -31,7 +31,7 @@ class HtmlFormatter extends AbstractFormatter
         return $error;
     }
 
-    protected function formatExceptions(\Exception $e)
+    protected function formatExceptions($e)
     {
         $inspector = new Util\Inspector($e);
 
