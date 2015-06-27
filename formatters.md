@@ -18,11 +18,11 @@ The library ships with several formatters for your convenience:
 
 * HtmlFormatter - Formats errors just like PHP's error formatting.
 * HtmlTableFormatter - Formats errors and exceptions similar to Xdebug, wth a full stack trace, even for errors.
-* JsonFormatter - Perfect for displaying errors to an API.
+* JsonFormatter - Perfect for displaying errors to an API. (It's recommended to use this in conjunction with blocking errors.)
 * CommandLineFormatter - Working with the command line? This will produce pretty command-line errors.
 * NullFormatter - This formatter simply silences all errors. You can pass this when display_errors = Off.
 
-Adding a formatter is easy:
+Registering a formatter is easy:
 
 ~~~ php
 $runner->pushFormatter(new League\BooBoo\Formatter\HtmlFormatter);
