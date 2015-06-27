@@ -14,7 +14,7 @@ When you're developing, you want to view errors in the browser. In order to do t
 Without a formatter, the system won't intelligently know how to display the errors. As a result, the Runner will throw
 an exception and won't register the error handlers.
 
-The library ships with four formatters for your convenience:
+The library ships with several formatters for your convenience:
 
 * HtmlFormatter - Formats errors just like PHP's error formatting.
 * HtmlTableFormatter - Formats errors and exceptions similar to Xdebug, wth a full stack trace, even for errors.
