@@ -19,7 +19,7 @@ class RavenHandler implements HandlerInterface
         $this->minimumLogLevel = $minimumLogLevel;
     }
 
-    public function handle(Exception $e)
+    public function handle($e)
     {
         if ($e instanceof ErrorException) {
             $level = $e->getSeverity();
@@ -28,7 +28,7 @@ class RavenHandler implements HandlerInterface
         }
 
         if ($this->minimumLogLevel & $level) {
-            $this->client->getIdent($this->client->captureException($e));
+            $this->client->captureException($e);
         }
     }
 }

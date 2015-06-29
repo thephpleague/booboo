@@ -21,7 +21,7 @@ class CallableHandler implements HandlerInterface
      *
      * @return \Exception
      */
-    public function handle(\Exception $e)
+    public function handle($e)
     {
         return call_user_func($this->callable, $e);
     }

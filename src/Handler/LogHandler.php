@@ -11,7 +11,7 @@ class LogHandler implements HandlerInterface
         $this->logger = $logger;
     }
 
-    public function handle(\Exception $e)
+    public function handle($e)
     {
         if ($e instanceof \ErrorException) {
             $this->handleErrorException($e);
