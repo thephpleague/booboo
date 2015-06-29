@@ -8,7 +8,6 @@ class RavenHandlerTest extends PHPUnit_Framework_TestCase
     {
 
         $ravenClient = Mockery::mock('Raven_Client');
-        $ravenClient->shouldReceive('getIdent')->once();
         $ravenClient->shouldReceive('captureException')->once()->with(Mockery::type('Exception'));
 
         $handler = new RavenHandler($ravenClient);
@@ -19,7 +18,6 @@ class RavenHandlerTest extends PHPUnit_Framework_TestCase
     {
 
         $ravenClient = Mockery::mock('Raven_Client');
-        $ravenClient->shouldReceive('getIdent')->once();
         $ravenClient->shouldReceive('captureException')->once()->with(Mockery::type('Exception'));
 
         $handler = new RavenHandler($ravenClient);
@@ -29,7 +27,6 @@ class RavenHandlerTest extends PHPUnit_Framework_TestCase
     public function testErrorLevelNotListenedForIsIgnored()
     {
         $ravenClient = Mockery::mock('Raven_Client');
-        $ravenClient->shouldNotHaveReceived('getIdent');
         $ravenClient->shouldNotHaveReceived('captureException');
 
         $errorLevel = E_ERROR | E_WARNING;
