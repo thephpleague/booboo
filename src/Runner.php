@@ -3,7 +3,6 @@
 namespace League\BooBoo;
 
 use ErrorException;
-use Exception;
 use League\BooBoo\Exception\NoFormattersRegisteredException;
 use League\BooBoo\Formatter\FormatterInterface;
 use League\BooBoo\Handler\HandlerInterface;
