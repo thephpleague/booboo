@@ -20,15 +20,8 @@ class CommandLineFormatter extends AbstractFormatter
         $severity = $this->determineSeverityTextValue($e->getSeverity());
 
         // Let's calculate the length of the box, and set the box border.
-        $dashes = "\n+";
-        $severityLength = strlen($severity);
-        for ($i = 0; $i < $severityLength + 2; $i++) {
-            $dashes .= '-';
-        }
-
-        $dashes .= "+\n";
-
-        $severity = $dashes . '| ' . strtoupper($severity) . " |". $dashes;
+        $dashes = "\n+" . str_repeat('-', strlen($severity) + 2) . "+\n";
+        $severity = $dashes . '| ' . strtoupper($severity) . " |" . $dashes;
 
         // Okay, now let's prep the message components.
         $error = $e->getMessage();
