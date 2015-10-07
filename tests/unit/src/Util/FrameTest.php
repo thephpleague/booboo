@@ -55,7 +55,7 @@ class FrameTest extends PHPUnit_Framework_TestCase {
 
     public function testGetFileContents()
     {
-        $this->assertEquals("test\ncontent", $this->frame->getFileContents());
+        $this->assertEquals("test" . PHP_EOL . "content", $this->frame->getFileContents());
     }
 
     public function testComments()
