@@ -4,9 +4,9 @@ permalink: formatters/
 title: Using Formatters
 ---
 
-#Using Formatters
+# Using Formatters
 
-BooBoo makes use of objects called Formatters to format error messages in a variety of ways. This makes them easy to read during the development process.
+BooBoo makes use of objects called Formatters to format error messages in a variety of ways. This makes them easy to read during the development process, and permits you to generate a user-facing "friendly" error page in production.
 
 ## Formatters are very important!
 
@@ -55,3 +55,11 @@ very important when dealing with formatters that only handle certain errors!
 For example, in the example above, we have one formatter limited to errors and warnings, and the other formatting all
 error types. If we insert the HTML handler first, it will be run last; this would cause the NullFormatter to format all
 errors, and we would get no output.
+
+## Error formatting on production systems
+
+The `display_errors` setting (in php.ini) is generally switched off on production servers, as a security measure, to prevent exposing sensitive information to end users. BooBoo respects this setting: the stack of error formatters will be *ignored* on production systems.
+
+To designate an error-formatter for use on production systems, use `Runner::setErrorPageFormatter()` - with `display_errors` switched off, this special formatter will be used *instead* of the error formatter stack.
+
+Note that BooBoo does not presently ship with a built-in "friendly" error-formatter.
