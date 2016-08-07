@@ -4,6 +4,11 @@ namespace League\BooBoo\Formatter;
 
 class JsonFormatter extends AbstractFormatter
 {
+    public function getContentType()
+    {
+        return 'application/json';
+    }
+
     public function format($e)
     {
         if ($e instanceof \ErrorException) {
