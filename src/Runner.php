@@ -128,6 +128,8 @@ class Runner
      */
     public function exceptionHandler($e)
     {
+        http_response_code(500);
+
         $this->runHandlers($e);
 
         if (!$this->silenceErrors) {
@@ -142,7 +144,6 @@ class Runner
             ob_start();
             $response = $this->errorPage->format($e);
             ob_end_clean();
-            http_response_code(500);
             print $response;
             return;
         }
