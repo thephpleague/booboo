@@ -60,7 +60,7 @@ class BooBoo
      * @param array $formatters
      * @param array $handlers
      */
-    public function __construct(array $formatters = [], array $handlers = [])
+    public function __construct(array $formatters, array $handlers = [])
     {
         // Let's honor the INI settings.
         if (ini_get('display_errors') == false) {

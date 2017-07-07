@@ -56,7 +56,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 
     protected function setUp() {
         ini_set('display_errors', true);
-        $this->runner = new BooBoo;
+        $this->runner = new BooBoo([]);
 
         $this->formatter = Mockery::mock('League\BooBoo\Formatter\AbstractFormatter');
         $this->handler = Mockery::mock('League\BooBoo\Handler\HandlerInterface');
@@ -67,12 +67,12 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
      * @expectedException \League\BooBoo\Exception\NoFormattersRegisteredException
      */
     public function testNoFormatterRaisesException() {
-        $runner = new BooBoo;
+        $runner = new BooBoo([]);
         $runner->register();
     }
 
     public function testHandlerMethods() {
-        $runner = new BooBoo;
+        $runner = new BooBoo([]);
 
         $this->assertEmpty($runner->getHandlers());
 
@@ -88,7 +88,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function testFormatterMethods() {
-        $runner = new BooBoo;
+        $runner = new BooBoo([]);
 
         $this->assertEmpty($runner->getFormatters());
 
@@ -123,7 +123,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
         $formatter->shouldReceive('getErrorLimit')->never();
         $formatter->shouldReceive('format')->never();
 
-        $runner = new BooBoo();
+        $runner = new BooBoo([]);
         $runner->silenceAllErrors(true);
         $runner->pushFormatter($formatter);
 
@@ -171,7 +171,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 
     public function testErrorReportingOffStillKillsFatalErrors() {
         error_reporting(0);
-        $runner = new BooBooExt();
+        $runner = new BooBooExt([]);
         $result = $runner->errorHandler(E_ERROR, 'error', 'index.php', 11);
         $this->assertTrue($result);
         error_reporting(E_ALL);
@@ -181,7 +181,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
         $er = ini_get('display_errors');
         ini_set('display_errors', 0);
 
-        $runner = new BooBooExt();
+        $runner = new BooBooExt([]);
         ini_set('display_errors', $er);
 
         $this->assertTrue($runner->getSilence());
@@ -216,7 +216,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 
     public function testHandlersAreRun()
     {
-        $runner = new BooBoo;
+        $runner = new BooBoo([]);
 
         $this->assertEmpty($runner->getHandlers());
 
