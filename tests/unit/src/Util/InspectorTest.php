@@ -34,4 +34,5 @@ class InspectorText extends PHPUnit_Framework_TestCase
         $this->assertEquals(count($this->exception->getTrace()), count($frames));
         $this->assertTrue($this->inspector->hasFrames());
     }
+
 }

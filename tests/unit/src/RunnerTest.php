@@ -254,4 +254,9 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 
         RunnerExt::$LAST_ERROR = E_ERROR;
     }
+
+    protected function tearDown()
+    {
+        Mockery::close();
+    }
 }

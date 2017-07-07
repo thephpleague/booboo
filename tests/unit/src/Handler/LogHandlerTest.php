@@ -89,4 +89,9 @@ class LogHandlerTest extends PHPUnit_Framework_TestCase {
             $this->fail($e->getMessage());
         }
     }
+
+    protected function tearDown()
+    {
+        Mockery::close();
+    }
 }

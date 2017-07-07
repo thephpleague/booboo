@@ -107,6 +107,4 @@ class FrameTest extends PHPUnit_Framework_TestCase {
         $unserializedObj = unserialize($serialized);
         $this->assertTrue(($this->frame == $unserializedObj));
     }
-
-
 }
