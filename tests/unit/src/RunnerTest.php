@@ -9,14 +9,14 @@ use Mockery;
 function error_get_last()
 {
     return [
-        'type' => RunnerExt::$LAST_ERROR,
+        'type' => BooBooExt::$LAST_ERROR,
         'message' => 'error in file',
         'file' => 'test.php',
         'line' => 8,
     ];
 }
 
-class RunnerExt extends Runner {
+class BooBooExt extends BooBoo {
 
     static public $LAST_ERROR = E_ERROR;
 
@@ -44,7 +44,7 @@ class RunnerExt extends Runner {
 class RunnerTest extends \PHPUnit_Framework_TestCase {
 
     /**
-     * @var Runner
+     * @var BooBoo
      */
     protected $runner;
 
@@ -56,7 +56,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 
     protected function setUp() {
         ini_set('display_errors', true);
-        $this->runner = new Runner;
+        $this->runner = new BooBoo;
 
         $this->formatter = Mockery::mock('League\BooBoo\Formatter\AbstractFormatter');
         $this->handler = Mockery::mock('League\BooBoo\Handler\HandlerInterface');
@@ -67,12 +67,12 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
      * @expectedException \League\BooBoo\Exception\NoFormattersRegisteredException
      */
     public function testNoFormatterRaisesException() {
-        $runner = new Runner;
+        $runner = new BooBoo;
         $runner->register();
     }
 
     public function testHandlerMethods() {
-        $runner = new Runner;
+        $runner = new BooBoo;
 
         $this->assertEmpty($runner->getHandlers());
 
@@ -88,7 +88,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function testFormatterMethods() {
-        $runner = new Runner;
+        $runner = new BooBoo;
 
         $this->assertEmpty($runner->getFormatters());
 
@@ -104,7 +104,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function testConstructorAssignsHandlersAndFormatters() {
-        $runner = new Runner(
+        $runner = new BooBoo(
             [
                 Mockery::mock('League\BooBoo\Formatter\FormatterInterface'),
                 Mockery::mock('League\BooBoo\Formatter\FormatterInterface'),
@@ -123,7 +123,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
         $formatter->shouldReceive('getErrorLimit')->never();
         $formatter->shouldReceive('format')->never();
 
-        $runner = new Runner();
+        $runner = new BooBoo();
         $runner->silenceAllErrors(true);
         $runner->pushFormatter($formatter);
 
@@ -171,7 +171,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 
     public function testErrorReportingOffStillKillsFatalErrors() {
         error_reporting(0);
-        $runner = new RunnerExt();
+        $runner = new BooBooExt();
         $result = $runner->errorHandler(E_ERROR, 'error', 'index.php', 11);
         $this->assertTrue($result);
         error_reporting(E_ALL);
@@ -181,7 +181,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
         $er = ini_get('display_errors');
         ini_set('display_errors', 0);
 
-        $runner = new RunnerExt();
+        $runner = new BooBooExt();
         ini_set('display_errors', $er);
 
         $this->assertTrue($runner->getSilence());
@@ -191,7 +191,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
         $formatter = Mockery::mock('League\BooBoo\Formatter\FormatterInterface');
         $formatter->shouldIgnoreMissing();
 
-        $runner = new RunnerExt([$formatter]);
+        $runner = new BooBooExt([$formatter]);
 
         $runner->register();
         $this->assertTrue($runner->registered);
@@ -216,7 +216,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 
     public function testHandlersAreRun()
     {
-        $runner = new Runner;
+        $runner = new BooBoo;
 
         $this->assertEmpty($runner->getHandlers());
 
@@ -234,22 +234,22 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
         $formatter->shouldReceive('getErrorLimit')->andReturn(E_ERROR);
         $formatter->shouldReceive('format');
 
-        $runner = new RunnerExt([$formatter]);
+        $runner = new BooBooExt([$formatter]);
         $runner->shutdownHandler();
     }
 
 
     public function testShutdownHandlerIgnoresNonfatal()
     {
-        RunnerExt::$LAST_ERROR = E_WARNING;
+        BooBooExt::$LAST_ERROR = E_WARNING;
         $formatter = Mockery::mock('League\BooBoo\Formatter\FormatterInterface');
         $formatter->shouldNotHaveReceived('getErrorLimit');
         $formatter->shouldNotHaveReceived('format');
 
-        $runner = new RunnerExt([$formatter]);
+        $runner = new BooBooExt([$formatter]);
         $runner->shutdownHandler();
 
-        RunnerExt::$LAST_ERROR = E_ERROR;
+        BooBooExt::$LAST_ERROR = E_ERROR;
     }
 
     protected function tearDown()

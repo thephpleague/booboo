@@ -7,7 +7,7 @@ use League\BooBoo\Exception\NoFormattersRegisteredException;
 use League\BooBoo\Formatter\FormatterInterface;
 use League\BooBoo\Handler\HandlerInterface;
 
-class Runner
+class BooBoo
 {
     /**
      * A constant for the error handling function.

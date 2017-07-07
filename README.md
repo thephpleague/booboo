@@ -85,7 +85,7 @@ formatters.
 ```php
 <?php
 
-$runner = new League\BooBoo\Runner();
+$runner = new League\BooBoo\BooBoo();
 $runner->register(); // Registers the handlers
 ```
 
