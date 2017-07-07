@@ -178,9 +178,6 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function testErrorsSilencedWhenErrorReportingOff() {
-        if(strpos(phpversion(), 'hhvm')) {
-            $this->markTestSkipped();
-        }
         $er = ini_get('display_errors');
         ini_set('display_errors', 0);
 
