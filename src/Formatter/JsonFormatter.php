@@ -42,6 +42,7 @@ class JsonFormatter extends AbstractFormatter
         $error = [
             'severity' => 'Exception',
             'type' => $type,
+            'code' => $e->getCode(),
             'message' => $message,
             'file' => $file,
             'line' => $line,

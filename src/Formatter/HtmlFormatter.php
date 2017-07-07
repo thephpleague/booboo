@@ -35,8 +35,13 @@ class HtmlFormatter extends AbstractFormatter
     {
         $inspector = new Util\Inspector($e);
 
-        $errorString = "<br /><strong>Fatal error:</strong> Uncaught exception '%s' with ";
-        $errorString .= "message '%s' in %s on line %d<br />%s<br />";
+        $errorString = "<br /><strong>Fatal error:</strong> Uncaught exception '%s'";
+
+        if ($e->getCode()) {
+            $errorString .= " (" . $e->getCode() . ") ";
+        }
+
+        $errorString .= " with message '%s' in %s on line %d<br />%s<br />";
 
         $type = get_class($e);
         $message = $e->getMessage();

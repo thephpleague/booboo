@@ -39,14 +39,20 @@ class HtmlTableFormatter extends AbstractFormatter
 
     protected function formatExceptions($e)
     {
-        $errorString = "<strong>Fatal error:</strong> Uncaught exception '%s' with message '%s' in %s on line %d";
+        $errorString = "<strong>Fatal error:</strong> Uncaught exception '%s' %s with message '%s' in %s on line %d";
 
         $type = get_class($e);
         $message = $e->getMessage();
         $file = $e->getFile();
         $line = $e->getLine();
 
-        $error = sprintf($errorString, $type, $message, $file, $line);
+        if ($e->getCode()) {
+            $code = '(' . $e->getCode() . ')';
+        } else {
+            $code = null;
+        }
+
+        $error = sprintf($errorString, $type, $code, $message, $file, $line);
         $result = $this->getTable($error);
         $inspector = $this->inspector;
 

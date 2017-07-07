@@ -35,7 +35,7 @@ class CommandLineFormatter extends AbstractFormatter
     protected function formatExceptions($e)
     {
         $errorString = "+---------------------+\n| UNHANDLED EXCEPTION |\n+---------------------+\n";
-        $errorString .= "Fatal error: Uncaught exception '%s' with message '%s' in %s on line %d\n\n";
+        $errorString .= "Fatal error: Uncaught exception '%s' %s with message '%s' in %s on line %d\n\n";
         $errorString .= "Stack Trace:\n%s\n";
 
         $type = get_class($e);
@@ -43,8 +43,12 @@ class CommandLineFormatter extends AbstractFormatter
         $file = $e->getFile();
         $line = $e->getLine();
         $trace = $e->getTraceAsString();
+        $code = null;
+        if ($e->getCode()) {
+            $code = '(' . $e->getCode() . ')';
+        }
 
-        $error = sprintf($errorString, $type, $message, $file, $line, $trace);
+        $error = sprintf($errorString, $type, $code, $message, $file, $line, $trace);
         return $error;
     }
 }

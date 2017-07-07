@@ -20,7 +20,7 @@ class JsonFormatterTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testRegularExceptionErrorFormatting() {
-        $exception = new \Exception('whoops');
+        $exception = new \Exception('whoops', 123);
         $trace = $exception->getTrace();
         $line = $exception->getLine();
         $file = $exception->getFile();
@@ -33,6 +33,7 @@ class JsonFormatterTest extends PHPUnit_Framework_TestCase {
 
         $expected = [
             'severity' => 'Exception',
+            'code' => 123,
             'type' => 'Exception',
             'message' => 'whoops',
             'file' => $file,
