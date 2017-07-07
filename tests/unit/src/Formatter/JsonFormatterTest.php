@@ -2,12 +2,19 @@
 
 use League\BooBoo\Formatter\JsonFormatter;
 
-class JsonFormatterTest extends PHPUnit_Framework_TestCase {
+class JsonFormatterTest extends PHPUnit_Framework_TestCase
+{
+    private $formatter;
 
-    public function testErrorExceptionFormatting() {
+    public function setUp()
+    {
+        $this->formatter = new JsonFormatter();
+    }
+
+    public function testErrorExceptionFormatting()
+    {
         $exception = new \ErrorException('whoops', 0, E_ERROR, 'index.php', 11);
-        $formatter = new JsonFormatter();
-        $result = $formatter->format($exception);
+        $result = $this->formatter->format($exception);
 
         $expected = json_encode([
             'message' => 'whoops',
@@ -19,13 +26,13 @@ class JsonFormatterTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, $result);
     }
 
-    public function testRegularExceptionErrorFormatting() {
+    public function testRegularExceptionErrorFormatting()
+    {
         $exception = new \Exception('whoops');
         $trace = $exception->getTrace();
         $line = $exception->getLine();
         $file = $exception->getFile();
-        $formatter = new JsonFormatter();
-        $result = $formatter->format($exception);
+        $result = $this->formatter->format($exception);
 
         $result = json_decode($result, true);
         // Exception traces change.
@@ -42,19 +49,22 @@ class JsonFormatterTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, $result);
     }
 
-    public function testNestedExceptionsDisplayBothMessages() {
+    public function testNestedExceptionsDisplayBothMessages()
+    {
         $exception = new \Exception('whoops');
         $exception2 = new Exception('bang', 0, $exception);
 
-        $formatter = new JsonFormatter();
-        $result = $formatter->format($exception2);
+        $result = $this->formatter->format($exception2);
 
         $result = json_decode($result, true);
 
         $this->assertEquals(2, count($result));
         $this->assertEquals('whoops', $result[0]['message']);
         $this->assertEquals('bang', $result[1]['message']);
-
     }
 
+    public function testContentType()
+    {
+        $this->assertSame('application/json', $this->formatter->getContentType());
+    }
 }

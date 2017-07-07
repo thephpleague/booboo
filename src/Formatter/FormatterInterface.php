@@ -9,4 +9,6 @@ interface FormatterInterface
     public function setErrorLimit($limit);
 
     public function getErrorLimit();
+
+    public function getContentType();
 }

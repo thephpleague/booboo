@@ -11,6 +11,11 @@ class HtmlTableFormatter extends AbstractFormatter
      */
     protected $formatter;
 
+    public function getContentType()
+    {
+        return 'text/html';
+    }
+
     public function format($e)
     {
         $this->inspector = new Util\Inspector($e);

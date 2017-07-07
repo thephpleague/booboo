@@ -6,6 +6,11 @@ use League\BooBoo\Util;
 
 class HtmlFormatter extends AbstractFormatter
 {
+    public function getContentType()
+    {
+        return 'text/html';
+    }
+
     public function format($e)
     {
         if ($e instanceof \ErrorException) {

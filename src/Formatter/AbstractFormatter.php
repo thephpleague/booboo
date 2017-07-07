@@ -60,4 +60,9 @@ abstract class AbstractFormatter implements FormatterInterface
     {
         return $this->errorLimit;
     }
+
+    public function getContentType()
+    {
+        return 'text/plain';
+    }
 }
