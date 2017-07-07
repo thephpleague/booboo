@@ -8,10 +8,8 @@ php:
   - nightly
 script:
   - composer install
-  - phpunit --coverage-clover build/logs/clover.xml
+  - vendor/bin/phpunit
 after_success:
-  - composer require codeclimate/php-test-reporter
-  - CODECLIMATE_REPO_TOKEN=0dae9e84e90ac32de1c02230a4a50fbdce59cc16aad458d8c1b22ccfd118e88d vendor/bin/test-reporter --stdout > codeclimate.json
-  - "curl -X POST -d @codeclimate.json -H 'Content-Type: application/json' -H 'User-Agent: Code Climate (PHP Test Reporter v0.1.1)' https://codeclimate.com/test_reports"
   - curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
   - php phpcs.phar -n --standard=PSR1,PSR2 src/
+dist: trusty
