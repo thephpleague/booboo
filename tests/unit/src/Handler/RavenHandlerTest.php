@@ -9,6 +9,7 @@ class RavenHandlerTest extends PHPUnit_Framework_TestCase
 
         $ravenClient = Mockery::mock('Raven_Client');
         $ravenClient->shouldReceive('captureException')->once()->with(Mockery::type('Exception'));
+        $ravenClient->makePartial();
 
         $handler = new SentryHandler($ravenClient);
         $handler->handle(new Exception);
@@ -19,6 +20,7 @@ class RavenHandlerTest extends PHPUnit_Framework_TestCase
 
         $ravenClient = Mockery::mock('Raven_Client');
         $ravenClient->shouldReceive('captureException')->once()->with(Mockery::type('Exception'));
+        $ravenClient->makePartial();
 
         $handler = new SentryHandler($ravenClient);
         $handler->handle(new ErrorException('test', 0, E_ERROR));
@@ -28,6 +30,7 @@ class RavenHandlerTest extends PHPUnit_Framework_TestCase
     {
         $ravenClient = Mockery::mock('Raven_Client');
         $ravenClient->shouldNotHaveReceived('captureException');
+        $ravenClient->makePartial();
 
         $errorLevel = E_ERROR | E_WARNING;
 
