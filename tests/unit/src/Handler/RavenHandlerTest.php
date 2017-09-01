@@ -1,6 +1,6 @@
 <?php
 
-use League\BooBoo\Handler\RavenHandler;
+use League\BooBoo\Handler\SentryHandler;
 
 class RavenHandlerTest extends PHPUnit_Framework_TestCase
 {
@@ -10,7 +10,7 @@ class RavenHandlerTest extends PHPUnit_Framework_TestCase
         $ravenClient = Mockery::mock('Raven_Client');
         $ravenClient->shouldReceive('captureException')->once()->with(Mockery::type('Exception'));
 
-        $handler = new RavenHandler($ravenClient);
+        $handler = new SentryHandler($ravenClient);
         $handler->handle(new Exception);
     }
 
@@ -20,7 +20,7 @@ class RavenHandlerTest extends PHPUnit_Framework_TestCase
         $ravenClient = Mockery::mock('Raven_Client');
         $ravenClient->shouldReceive('captureException')->once()->with(Mockery::type('Exception'));
 
-        $handler = new RavenHandler($ravenClient);
+        $handler = new SentryHandler($ravenClient);
         $handler->handle(new ErrorException('test', 0, E_ERROR));
     }
 
@@ -31,7 +31,7 @@ class RavenHandlerTest extends PHPUnit_Framework_TestCase
 
         $errorLevel = E_ERROR | E_WARNING;
 
-        $handler = new RavenHandler($ravenClient, $errorLevel);
+        $handler = new SentryHandler($ravenClient, $errorLevel);
         $handler->handle(new ErrorException('test', 0, E_NOTICE));
 
     }

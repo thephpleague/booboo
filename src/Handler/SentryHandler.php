@@ -3,10 +3,9 @@
 namespace League\BooBoo\Handler;
 
 use ErrorException;
-use Exception;
 use Raven_Client;
 
-class RavenHandler implements HandlerInterface
+class SentryHandler implements HandlerInterface
 {
     /**
      * @var \Raven_Client

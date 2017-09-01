@@ -10,11 +10,11 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
+        "php": ">=5.6.0",
         "psr/log": "~1.0"
     },
     "suggest": {
-        "raven/raven": "Use Raven for passing errors to Sentry."
+        "sentry/sentry": "Use Sentry for passing errors to Sentry."
     },
     "autoload": {
         "psr-4": {
@@ -24,6 +24,6 @@
     "require-dev": {
         "mockery/mockery": "~0.9",
         "phpunit/phpunit": "~5.7",
-        "raven/raven": "0.10.0"
+        "sentry/sentry": "~1.7"
     }
 }
