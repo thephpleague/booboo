@@ -1,8 +1,9 @@
 <?php
 
 use League\BooBoo\Handler\SentryHandler;
+use PHPUnit\Framework\TestCase;
 
-class RavenHandlerTest extends PHPUnit_Framework_TestCase
+class RavenHandlerTest extends TestCase
 {
     public function testRavenLogHandler()
     {

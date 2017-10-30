@@ -8,7 +8,7 @@ class TestCallableForHandler
     }
 }
 
-class CallableHandlerTest extends PHPUnit_Framework_TestCase
+class CallableHandlerTest extends \PHPUnit\Framework\TestCase
 {
     public function testCallableIsCalled()
     {

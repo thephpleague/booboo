@@ -8,7 +8,7 @@ class TestCallableForFormatter
     }
 }
 
-class CallableFormatterTest extends PHPUnit_Framework_TestCase
+class CallableFormatterTest extends \PHPUnit\Framework\TestCase
 {
     public function testCallableIsCalled()
     {

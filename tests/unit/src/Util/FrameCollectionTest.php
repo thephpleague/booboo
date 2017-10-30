@@ -1,6 +1,6 @@
 <?php
 
-class FrameCollectionTest extends PHPUnit_Framework_TestCase
+class FrameCollectionTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var \Exception

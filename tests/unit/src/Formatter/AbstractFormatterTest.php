@@ -20,7 +20,7 @@ class AbstractFormatterExt extends Formatter\AbstractFormatter {
     }
 }
 
-class AbstractFormatterTest extends PHPUnit_Framework_TestCase {
+class AbstractFormatterTest extends \PHPUnit\Framework\TestCase {
 
     public function testSeverityTextCorrect() {
         $formatter = new AbstractFormatterExt;
