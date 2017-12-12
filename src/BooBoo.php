@@ -130,7 +130,7 @@ class BooBoo
     {
         http_response_code(500);
 
-        $this->runHandlers($e);
+        $e = $this->runHandlers($e);
 
         if (!$this->silenceErrors) {
             $formattedResponse = $this->runFormatters($e);
@@ -286,7 +286,10 @@ class BooBoo
     {
         /** @var \League\BooBoo\Handler\HandlerInterface $handler */
         foreach (array_reverse($this->handlerStack) as $handler) {
-            $handler->handle($e);
+            $handledException = $handler->handle($e);
+            if ($handledException instanceof \Exception) {
+                $e = $handledException;
+            }
         }
 
         return $e;
