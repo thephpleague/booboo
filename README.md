@@ -78,18 +78,18 @@ PHP is changing every year, and BooBoo will change along with it.
 
 ### Instantiation
 
-The main object that you need to instantiate is `League\BooBoo\Runner`. This object takes care of setting the error
+The main object that you need to instantiate is `League\BooBoo\BooBoo`. This object takes care of setting the error
 handler, as well as handling errors and exceptions. It takes optional arguments during construction for handlers and
 formatters.
 
 ```php
 <?php
 
-$runner = new League\BooBoo\BooBoo();
-$runner->register(); // Registers the handlers
+$booboo = new League\BooBoo\BooBoo();
+$booboo->register(); // Registers the handlers
 ```
 
-It's very important to call `Runner::register()` or the object won't register itself as PHP's error handler.
+It's very important to call `BooBoo::register()` or the object won't register itself as PHP's error handler.
 
 ### Formatters are very important!
 
@@ -109,7 +109,7 @@ Adding a formatter is easy:
 ```php
 <?php
 
-$runner->pushFormatter(new League\BooBoo\Formatter\HtmlFormatter());
+$booboo->pushFormatter(new League\BooBoo\Formatter\HtmlFormatter());
 ```
 
 ### Controlling which formatter does the formatting
@@ -129,8 +129,8 @@ $null = new League\BooBoo\Formatter\NullFormatter();
 $html->setErrorLimit(E_ERROR | E_WARNING | E_USER_ERROR | E_USER_WARNING);
 $null->setErrorLimit(E_ALL);
 
-$runner->pushFormatter($null);
-$runner->pushFormatter($html);
+$booboo->pushFormatter($null);
+$booboo->pushFormatter($html);
 ```
 
 ### Formatters and handlers are a stack
