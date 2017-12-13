@@ -5,6 +5,7 @@ namespace League\BooBoo;
 use League\BooBoo\Formatter;
 use League\BooBoo\Handler;
 use Mockery;
+use PHPUnit\Framework\TestCase;
 
 function error_get_last()
 {
@@ -41,7 +42,7 @@ class BooBooExt extends BooBoo {
 
 }
 
-class RunnerTest extends \PHPUnit_Framework_TestCase {
+class RunnerTest extends TestCase {
 
     /**
      * @var BooBoo

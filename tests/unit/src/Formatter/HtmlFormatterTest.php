@@ -1,8 +1,9 @@
 <?php
 
 use League\BooBoo\Formatter\HtmlFormatter;
+use PHPUnit\Framework\TestCase;
 
-class HtmlFormatterTest extends PHPUnit_Framework_TestCase {
+class HtmlFormatterTest extends TestCase {
 
     public function testErrorExceptionFormatting() {
         $exception = new \ErrorException('whoops', 0, E_ERROR, 'index.php', 11);

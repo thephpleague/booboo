@@ -1,8 +1,9 @@
 <?php
 
 use League\BooBoo\Formatter;
+use PHPUnit\Framework\TestCase;
 
-class NullFormatterTest extends PHPUnit_Framework_TestCase {
+class NullFormatterTest extends TestCase {
 
     public function testNoResponseForAnyException() {
         $formatter = new Formatter\NullFormatter();

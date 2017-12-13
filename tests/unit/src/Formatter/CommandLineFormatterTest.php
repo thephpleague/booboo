@@ -1,8 +1,9 @@
 <?php
 
 use \League\BooBoo\Formatter\CommandLineFormatter;
+use PHPUnit\Framework\TestCase;
 
-class CommandLineFormatterText extends PHPUnit_Framework_TestCase
+class CommandLineFormatterText extends TestCase
 {
     public function testHandleErrorsReturnsValidErrorMessage()
     {

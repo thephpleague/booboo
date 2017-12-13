@@ -1,8 +1,9 @@
 <?php
 
 use League\BooBoo\Handler\LogHandler;
+use PHPUnit\Framework\TestCase;
 
-class LogHandlerTest extends PHPUnit_Framework_TestCase {
+class LogHandlerTest extends TestCase {
 
     /**
      * @var LogHandler

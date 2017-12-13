@@ -1,8 +1,9 @@
 <?php
 
 use League\BooBoo\Util\Inspector;
+use PHPUnit\Framework\TestCase;
 
-class InspectorText extends PHPUnit_Framework_TestCase
+class InspectorText extends TestCase
 {
     /**
      * @var Inspector

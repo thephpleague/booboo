@@ -1,8 +1,9 @@
 <?php
 
 use League\BooBoo\Formatter\JsonFormatter;
+use PHPUnit\Framework\TestCase;
 
-class JsonFormatterTest extends PHPUnit_Framework_TestCase {
+class JsonFormatterTest extends TestCase {
 
     public function testErrorExceptionFormatting() {
         $exception = new \ErrorException('whoops', 0, E_ERROR, 'index.php', 11);

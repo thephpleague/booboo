@@ -1,8 +1,9 @@
 <?php
 
 use League\BooBoo\Util\Frame;
+use PHPUnit\Framework\TestCase;
 
-class FrameTest extends PHPUnit_Framework_TestCase {
+class FrameTest extends TestCase {
 
     /**
      * @var Frame
