@@ -7,9 +7,9 @@ use League\BooBoo\Util;
 class HtmlTableFormatter extends AbstractFormatter
 {
     /**
-     * @var Util\Formatter;
+     * @var Util\Inspector;
      */
-    protected $formatter;
+    protected $inspector;
 
     public function format($e)
     {
