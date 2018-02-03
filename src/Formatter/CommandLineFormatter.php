@@ -4,6 +4,17 @@ namespace League\BooBoo\Formatter;
 
 class CommandLineFormatter extends AbstractFormatter
 {
+
+    protected $showExceptionsStack;
+
+    /**
+     * @param bool $showExceptionsStack  If set to true will display the complete stack of exception and their traces,
+     *                                   instead of showing only the highest one.
+     */
+    public function __construct($showExceptionsStack = false) {
+        $this->showExceptionsStack = $showExceptionsStack;
+    }
+
     public function format($e)
     {
         if ($e instanceof \ErrorException) {
@@ -32,11 +43,15 @@ class CommandLineFormatter extends AbstractFormatter
         return $error;
     }
 
-    protected function formatExceptions($e)
+    /**
+     * @param \Throwable $e
+     * @return string
+     */
+    protected function formatSingleException($e)
     {
-        $errorString = "+---------------------+\n| UNHANDLED EXCEPTION |\n+---------------------+\n";
-        $errorString .= "Fatal error: Uncaught exception '%s' %s with message '%s' in %s on line %d\n\n";
-        $errorString .= "Stack Trace:\n%s\n";
+        $errorString = "%s%s: %s\n";
+        $errorString .= "%s(%d)\n\n";
+        $errorString .= "TRACE:\n%s\n";
 
         $type = get_class($e);
         $message = $e->getMessage();
@@ -45,10 +60,31 @@ class CommandLineFormatter extends AbstractFormatter
         $trace = $e->getTraceAsString();
         $code = null;
         if ($e->getCode()) {
-            $code = '(' . $e->getCode() . ')';
+            $code = '[' . $e->getCode() . '] ';
         }
 
-        $error = sprintf($errorString, $type, $code, $message, $file, $line, $trace);
+        $error = sprintf($errorString, $code, $type, $message, $file, $line, $trace);
+        return $error;
+    }
+
+    /**
+     * @param \Throwable $e
+     * @return string
+     */
+    protected function formatExceptions($e)
+    {
+        $header = "+---------------------------+\n|    UNHANDLED EXCEPTION    |\n+---------------------------+\n";
+        $error = $header.$this->formatSingleException($e);
+
+        if ($this->showExceptionsStack) {
+            $i = 1;
+            while ($e = $e->getPrevious()) {
+                $ct = str_pad($i++, 3, '0', STR_PAD_LEFT);
+                $error .= "\n+---------------+\n| PREVIOUS #$ct |\n+---------------+\n";
+                $error .= $this->formatSingleException($e);
+            }
+        }
+
         return $error;
     }
 }
