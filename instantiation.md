@@ -4,7 +4,7 @@ permalink: instantiation/
 title: Instantiation
 ---
 
-#Instantiating BooBoo
+# Instantiating BooBoo
 
 The main object that you need to instantiate is League\BooBoo\BooBoo. This object takes care of setting the error
 handler, as well as handling errors and exceptions. It takes optional arguments during construction for handlers and
