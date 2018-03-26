@@ -4,7 +4,7 @@ permalink: installing-booboo/
 title: Installing BooBoo
 ---
 
-#Installing BooBoo
+# Installing BooBoo
 
 This library requires PHP 5.4 or later. It is not regularly tested against HHVM, but there is nothing in this package
 that should fail against HHVM. However, support is not guaranteed.
