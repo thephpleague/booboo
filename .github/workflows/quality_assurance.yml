@@ -10,12 +10,28 @@ jobs:
     steps:
       - name: Check Out Default Actions
         uses: actions/checkout@v2
+
       - name: Setup PHP Action
         uses: shivammathur/setup-php@2.12.0
         with:
             php-version: ${{ matrix.php-versions }}
             coverage: xdebug
             tools: phpunit:${{ matrix.phpunit-versions }}
+
+      - name: Get Composer Cache Components
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install Composer Dependencies
+        run: composer install --prefer-dist
+
       - name: Run Unit Tests
         run: phpunit
 
