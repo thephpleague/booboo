@@ -3,16 +3,16 @@
 namespace League\BooBoo\Handler;
 
 use ErrorException;
-use Raven_Client;
+use Sentry\ClientInterface;
 
 class SentryHandler implements HandlerInterface
 {
     /**
-     * @var \Raven_Client
+     * @var \Client
      */
     protected $client;
 
-    public function __construct(Raven_Client $client, $minimumLogLevel = E_ALL)
+    public function __construct(ClientInterface $client, $minimumLogLevel = E_ALL)
     {
         $this->client = $client;
         $this->minimumLogLevel = $minimumLogLevel;

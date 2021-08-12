@@ -11,7 +11,7 @@
     ],
     "require": {
         "php": ">=7.3|>=8.0",
-        "psr/log": "~1.0"
+        "psr/log": "^1.0"
     },
     "suggest": {
         "sentry/sentry": "Use Sentry for passing errors to Sentry."
@@ -23,8 +23,9 @@
         }
     },
     "require-dev": {
-        "mockery/mockery": "~1.4",
-        "phpunit/phpunit": "~9.5",
-        "sentry/sentry": "~1.7"
+        "mockery/mockery": "^1.4",
+        "phpunit/phpunit": "^9.5",
+        "php-http/mock-client": "^1.4",
+        "sentry/sentry": "^3.3"
     }
 }
