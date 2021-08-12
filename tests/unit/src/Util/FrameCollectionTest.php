@@ -12,7 +12,7 @@ class FrameCollectionTest extends \PHPUnit\Framework\TestCase
      */
     protected $container;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->exception = new Exception;
         $this->container = new \League\BooBoo\Util\FrameCollection($this->exception->getTrace());
@@ -33,20 +33,16 @@ class FrameCollectionTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($count, $collection->count());
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testOffsetSetRaisesException()
     {
+        $this->expectException(\Exception::class);
         $collection = $this->container;
         $collection->offsetSet(1, 2);
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testOffsetUnsetRaisesException()
     {
+        $this->expectException(\Exception::class);
         $collection = $this->container;
         $collection->offsetUnset(1);
     }

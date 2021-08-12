@@ -13,7 +13,8 @@ class FrameTest extends TestCase {
 
     protected $frameArr = array();
 
-    protected function setUp() {
+    protected function setUp() : void
+    {
 
         $frame = [
             'file' => __DIR__.'/../../index.php',
@@ -85,11 +86,9 @@ class FrameTest extends TestCase {
         $this->assertEquals(['test', 'content'], $this->frame->getFileLines(-100, 2));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testGetFileLinesLengthLessThanZeroRaisesException()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $this->frame->getFileLines(0, -1);
     }
 

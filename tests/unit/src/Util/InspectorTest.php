@@ -15,7 +15,7 @@ class InspectorText extends TestCase
      */
     protected $exception;
 
-    public function setUp()
+    public function setUp() : void
     {
         $this->exception = new ErrorException('test message');
         $this->inspector = new Inspector($this->exception);

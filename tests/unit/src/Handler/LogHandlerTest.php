@@ -16,28 +16,20 @@ class LogHandlerTest extends TestCase {
     protected $logger;
 
 
-    protected function setUp() {
-        $this->logger = Mockery::mock('Psr\Log\LoggerInterface');
+    protected function setUp() : void
+    {
+        $this->logger = new \Tests\Fakes\Psr3Handler();
         $this->handler = new LogHandler($this->logger);
     }
 
     public function testExceptionsAreLoggedCritical() {
-        $this->logger->shouldReceive('critical')->once();
-
         $this->handler->handle(new \Exception);
-
-        try {
-            $this->logger->mockery_verify();
-        } catch (\Exception $e) {
-            $this->fail($e->getMessage());
-        }
+        $this->assertEquals(1, $this->logger::$critical);
     }
 
     public function testErrorExceptionForErrors() {
         $message = 'test message';
         $exception = new \ErrorException($message);
-        $this->logger->shouldReceive('error')->times(6);
-
         $this->handler->handle(new \ErrorException($message, 0, E_ERROR));
         $this->handler->handle(new \ErrorException($message, 0, E_RECOVERABLE_ERROR));
         $this->handler->handle(new \ErrorException($message, 0, E_CORE_ERROR));
@@ -45,53 +37,34 @@ class LogHandlerTest extends TestCase {
         $this->handler->handle(new \ErrorException($message, 0, E_USER_ERROR));
         $this->handler->handle(new \ErrorException($message, 0, E_PARSE));
 
-        try {
-            $this->logger->mockery_verify();
-        } catch (\Exception $e) {
-            $this->fail($e->getMessage());
-        }
+        $this->assertEquals(6, $this->logger::$error);
     }
 
     public function testErrorExceptionForWarnings() {
         $message = 'test message';
         $exception = new \ErrorException($message);
-        $this->logger->shouldReceive('warning')->times(4);
-
         $this->handler->handle(new \ErrorException($message, 0, E_WARNING));
         $this->handler->handle(new \ErrorException($message, 0, E_USER_WARNING));
         $this->handler->handle(new \ErrorException($message, 0, E_CORE_WARNING));
         $this->handler->handle(new \ErrorException($message, 0, E_COMPILE_WARNING));
 
-
-        try {
-            $this->logger->mockery_verify();
-        } catch (\Exception $e) {
-            $this->fail($e->getMessage());
-        }
+        $this->assertEquals(4, $this->logger::$warning);
     }
 
     public function testErrorExceptionForNoticesAndInfo() {
         $message = 'test message';
         $exception = new \ErrorException($message);
-        $this->logger->shouldReceive('notice')->times(2);
-        $this->logger->shouldReceive('info')->times(3);
-
         $this->handler->handle(new \ErrorException($message, 0, E_NOTICE));
         $this->handler->handle(new \ErrorException($message, 0, E_USER_NOTICE));
         $this->handler->handle(new \ErrorException($message, 0, E_STRICT));
         $this->handler->handle(new \ErrorException($message, 0, E_DEPRECATED));
         $this->handler->handle(new \ErrorException($message, 0, E_USER_DEPRECATED));
 
-
-
-        try {
-            $this->logger->mockery_verify();
-        } catch (\Exception $e) {
-            $this->fail($e->getMessage());
-        }
+        $this->assertEquals(2, $this->logger::$notice);
+        $this->assertEquals(3, $this->logger::$info);
     }
 
-    protected function tearDown()
+    protected function tearDown() : void
     {
         Mockery::close();
     }
