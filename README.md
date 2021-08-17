@@ -102,7 +102,8 @@ The library ships with four formatters for your convenience:
 * `HtmlFormatter` - Formats errors just like PHP's error formatting.
 * `HtmlTableFormatter` - Formats errors and exceptions similar to Xdebug, wth a full stack trace, even for errors.
 * `JsonFormatter` - Perfect for displaying errors to an API.
-* `CommandLineFormatter` - Working with the command line? This will produce pretty command-line errors.
+* `CommandLineFormatter` - Working with the command line? This will produce pretty command-line errors.  
+  A constructor option can be used to display extended exception stack.
 * `NullFormatter` - This formatter simply silences all errors. You can pass this when display_errors = Off.
 Adding a formatter is easy:
 
