@@ -10,8 +10,6 @@ use ArrayAccess;
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
-use Serializable;
-use UnexpectedValueException;
 
 /**
  * Exposes a fluent interface for dealing with an ordered list
@@ -50,54 +48,66 @@ class FrameCollection implements ArrayAccess, IteratorAggregate, Countable
 
     /**
      * @see IteratorAggregate::getIterator
-     * @return ArrayIterator
+     * @link https://www.php.net/manual/en/iteratoraggregate.getiterator
+     * @return \Traversable|\ArrayIterator
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new ArrayIterator($this->frames);
     }
 
     /**
      * @see ArrayAccess::offsetExists
-     * @param int $offset
+     * @link https://www.php.net/manual/en/arrayaccess.offsetexists
+     * @param mixed $offset
+     * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists(mixed $offset): bool
     {
         return isset($this->frames[$offset]);
     }
 
     /**
      * @see ArrayAccess::offsetGet
-     * @param int $offset
+     * @link https://www.php.net/manual/en/arrayaccess.offsetget.php
+     * @param mixed $offset
+     * @return mixed
      */
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
         return $this->frames[$offset];
     }
 
     /**
      * @see ArrayAccess::offsetSet
+     * @link https://www.php.net/manual/en/arrayaccess.offsetset.php
      * @param int $offset
+     * @return void
+     * @throws \Exception
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         throw new \Exception(__CLASS__ . ' is read only');
     }
 
     /**
      * @see ArrayAccess::offsetUnset
+     * @link https://www.php.net/manual/en/arrayaccess.offsetunset.php
      * @param int $offset
+     * @return void
+     * @throws \Exception
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         throw new \Exception(__CLASS__ . ' is read only');
     }
 
     /**
      * @see Countable::count
+     * @link https://www.php.net/manual/en/countable.count
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->frames);
     }
